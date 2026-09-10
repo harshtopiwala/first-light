@@ -1,0 +1,2482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First Light - a sun study for one lot</title>
+<meta name="description" content="Working out which windows get the winter sun, whether the driveway clears itself, and when the back yard is usable - from the survey drawings and the historical weather record.">
+<!-- Link preview. LinkedIn, Slack and iMessage read these.
+     og:url and og:image MUST be absolute URLs. A relative path renders no card. -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="First Light - a sun study for one lot">
+<meta property="og:description" content="The driveway takes 96 per cent of December's daylight. Computed from the survey drawings, with every assumption and its sensitivity stated.">
+<meta property="og:url" content="https://REPLACE-WITH-YOUR-PAGES-URL/">
+<meta property="og:image" content="https://REPLACE-WITH-YOUR-PAGES-URL/og_preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FCFBF8; --paper-sunk:#F5F2EC; --surface:#fff;
+  --rule:#E3DFD6; --rule-strong:#C9C3B6;
+  --ink:#17181B; --ink-2:#575C66; --ink-3:#8B909B;
+  --sun:#B45F1E; --sun-tint:#F3E5D4; --shade:#35506B; --shade-tint:#DFE5EB;
+  --snow:#6E93B8; --warn:#8A5A1B;
+  --font-display:"Source Serif 4",Georgia,serif;
+  --font-body:"Source Serif 4",Georgia,serif;
+  --font-ui:Inter,system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 18px/1.62 var(--font-body);
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.measure{max-width:680px}
+h1,h2,h3{font-family:var(--font-display);margin:0}
+h1{font-size:44px;line-height:1.12;letter-spacing:-.02em;font-weight:400;max-width:17ch}
+h2{font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:96px 0 24px}
+h3{font-size:20px;line-height:1.3;font-weight:600;margin:0 0 12px}
+p{margin:0 0 24px}
+a{color:var(--sun);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--sun)}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+
+.masthead{padding:64px 0 0}
+.label{font:400 13px/1.5 var(--font-ui);color:var(--ink-2);margin:0 0 16px}
+.lead{font-size:21px;line-height:1.55}
+
+/* dimension-tick divider, borrowed from the survey drawings */
+.dim{display:flex;align-items:center;gap:12px;margin:64px 0 32px;
+  font:400 13px/1 var(--font-ui);color:var(--ink-2)}
+.dim::before{content:"";flex:0 0 24px;height:1px;background:var(--rule-strong)}
+.dim::after{content:"";flex:1;height:1px;background:var(--rule-strong)}
+
+.stats{display:flex;gap:64px;flex-wrap:wrap;margin:48px 0 0}
+.stat{border-left:1px solid var(--rule-strong);padding-left:16px}
+.stat .n{display:block;font:400 40px/1 var(--font-mono);letter-spacing:-.01em}
+.stat .u{font-size:.55em;color:var(--ink-3);margin-left:2px}
+.stat .c{font:400 15px/1.45 var(--font-body);color:var(--ink-2);margin-top:8px;max-width:26ch}
+
+.plate{background:var(--surface);border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);padding:32px;margin:48px 0}
+figure{margin:0}
+figcaption{font:400 13px/1.5 var(--font-ui);color:var(--ink-2);margin-top:16px;max-width:78ch}
+figcaption b{color:var(--ink);font-weight:600}
+.src{font:400 12px/1.5 var(--font-ui);color:var(--ink-3);margin:12px 0 0}
+
+.controls{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;
+  border-top:1px solid var(--rule);padding-top:20px;margin-top:24px}
+.ctl{display:flex;flex-direction:column;gap:8px;min-width:180px}
+.ctl label{font:500 13px/1 var(--font-ui);color:var(--ink-2)}
+.ctl output{font:400 13px/1 var(--font-mono);color:var(--ink)}
+input[type=range]{appearance:none;width:100%;height:14px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule-strong)}
+input[type=range]::-moz-range-track{height:2px;background:var(--rule-strong)}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--rule-strong);margin-top:-6px}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--rule-strong)}
+.check{flex-direction:row;align-items:center;gap:10px;min-width:0}
+.check input{accent-color:var(--sun);width:16px;height:16px}
+button.primary{font:500 14px/1 var(--font-ui);letter-spacing:.01em;background:var(--ink);
+  color:var(--paper);border:0;border-radius:4px;padding:10px 18px;cursor:pointer}
+button.text{font:500 14px/1 var(--font-ui);background:none;border:0;color:var(--sun);
+  cursor:pointer;padding:10px 0;border-bottom:1px solid transparent}
+button.text:hover{border-bottom-color:var(--sun)}
+
+table{border-collapse:collapse;width:100%;font:400 13px/1.45 var(--font-mono)}
+th,td{padding:8px 10px;text-align:right}
+thead th{background:var(--paper-sunk);font-weight:400;color:var(--ink-2)}
+tbody tr{border-top:1px solid var(--rule)}
+tbody tr:hover{background:var(--sun-tint)}
+th:first-child,td:first-child{text-align:left;font:400 14px/1.4 var(--font-ui)}
+tr.aux td{color:var(--ink-3)}
+
+.flag{font:400 11px/1.4 var(--font-ui);color:var(--warn)}
+.flag::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--warn);margin-right:6px;vertical-align:2px}
+.assump th:first-child{width:26%}
+.assump td,.assump th{text-align:left}
+.assump td:last-child{color:var(--ink-2)}
+
+.busy{font:400 13px/1 var(--font-ui);color:var(--ink-3);padding:80px 0;text-align:center}
+.scroller{overflow-x:auto}
+footer{margin:96px 0 64px;border-top:1px solid var(--rule);padding-top:24px;
+  font:400 13px/1.6 var(--font-ui);color:var(--ink-3)}
+
+@media(max-width:900px){
+  .plate{margin-left:-24px;margin-right:-24px;border-left:0;border-right:0;padding:24px 16px}
+}
+@media(max-width:640px){
+  body{font-size:17px}
+  h1{font-size:34px}
+  h2{font-size:24px;margin-top:64px}
+  .stats{gap:32px}
+  .ctl{min-width:100%}
+  input[type=range]{height:44px}
+  input[type=range]::-webkit-slider-thumb{margin-top:-21px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="masthead measure">
+    <p class="label">A zero-lot-line lot in southwest Edmonton</p>
+    <h1>The driveway faces the winter sunrise</h1>
+    <p class="lead">Buying a house from a plan means committing to an orientation
+    before anything is built. Which rooms get morning light, whether the driveway
+    clears itself, when the back yard becomes usable again - all of it is fixed the
+    moment you choose a lot, and none of it appears on a feature sheet. This is what
+    the survey drawings and the weather record say about one of them.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <p class="dim">The lot, through the year</p>
+
+  <figure class="plate">
+    <div id="scene" class="busy" style="min-height:320px">Building the model…</div>
+    <div class="controls" id="sceneControls"></div>
+    <figcaption><b>Figure 1.</b> The surveyed massing under real solar geometry.
+    Shadows are cast by the renderer from the sun's true position for the date and
+    time shown. The ground carries the output of the melt model: where the snow is
+    thin, it is thin because that patch received more energy. Drag to orbit, scroll
+    to zoom.</figcaption>
+    <p class="src" id="sceneSrc"></p>
+  </figure>
+
+  <div class="measure"><p id="sceneProse"></p></div>
+
+  <p class="dim">Where the sun lands</p>
+
+  <figure class="plate">
+    <div id="plan" class="busy">Computing shading model…</div>
+    <div class="controls" id="planControls"></div>
+    <figcaption><b>Figure 1.</b> Direct sun hours on open ground, by half-metre cell,
+    on a clear day. Rear of the lot at the top, frontage at the bottom. The needle
+    shows true north at its surveyed bearing. Drag the month to step through the year.</figcaption>
+    <p class="src">Geometry from the preliminary plot plan and the
+    Cantiro elevation set. Solar position by the NOAA/Meeus algorithm.</p>
+  </figure>
+
+  <div class="measure">
+    <p id="planProse"></p>
+  </div>
+
+  <h2>Every window faces front or back</h2>
+  <div class="measure">
+    <p>This is a zero-lot-line skinny home, and both long elevations are blank -
+    soffit vents only, no windows at all. That single fact is why orientation
+    matters more here than it would on a wide lot. There is no side glazing to
+    compensate with. The frontage bearing is not one input among many; it is the
+    only thing that determines interior daylight.</p>
+    <p>The floor plans then decide who gets which half. Kitchen, dining, living
+    room, primary bedroom and ensuite all face the rear, so they take the long
+    summer evening. Garage, den, foyer and all three children's bedrooms face the
+    front, so they take the winter morning.</p>
+  </div>
+
+  <figure class="plate">
+    <div id="chart" class="busy">Computing…</div>
+    <figcaption><b>Figure 2.</b> Direct sun hours per clear day through the year,
+    by zone, against the daylight available that day.</figcaption>
+  </figure>
+
+  <h2>The back yard: planting, and evenings</h2>
+  <div class="measure">
+    <p id="gardenProse"></p>
+  </div>
+
+  <figure class="plate scroller">
+    <table id="garden"></table>
+    <figcaption><b>Figure 3.</b> Growing-season sun by zone. Categories follow the
+    usual horticultural bands: full sun is six hours a day or more, part sun four
+    to six, part shade two to four, full shade below two. Evening hours are direct
+    sun after 5pm on the longest day, which is when a back yard actually gets used.</figcaption>
+    <p class="src">Clear-day hours. Cloud cover will reduce all of these
+    proportionally; the ranking between zones does not change.</p>
+  </figure>
+
+  <h2>The one day that matters</h2>
+  <div class="measure">
+    <p id="winterProse"></p>
+  </div>
+
+  <figure class="plate">
+    <div id="timeline" class="busy">Computing…</div>
+    <figcaption><b>Figure 4.</b> When each zone is more than half lit on 21 December,
+    in local time.</figcaption>
+  </figure>
+
+  <h2>Try it on your own lot</h2>
+  <div class="measure">
+    <p>The engine takes a frontage bearing and a latitude and works everything out
+    from there. Turn the lot and watch which surfaces gain and lose. The bearing
+    slider is instant because rotating the lot does not change what the house blocks
+    - only where the sun is relative to it.</p>
+  </div>
+
+  <figure class="plate">
+    <div class="controls" id="lotControls"></div>
+    <div id="compare" style="margin-top:24px"></div>
+    <figcaption><b>Figure 5.</b> December and June sun hours by zone as the frontage
+    bearing turns. The vertical rule marks this lot at 114.42°.</figcaption>
+  </figure>
+
+  <h2>What the model assumes</h2>
+  <div class="measure">
+    <p>The preliminary plot plan is treated as final. Where it defers a value, a
+    standard assumption is taken. Each one below carries what it costs if it is
+    wrong, measured by rerunning the model rather than estimated.</p>
+  </div>
+  <div class="plate scroller">
+    <table class="assump">
+      <thead><tr><th>Assumption</th><th>Value</th><th>Basis</th><th>Cost if wrong</th></tr></thead>
+      <tbody>
+        <tr><td>Finished floor above grade</td><td>0.65 m</td>
+            <td>Entry step stack and foundation stack agree independently</td>
+            <td>Negligible. Moving it 50 mm changed no zone by more than 0.1 h</td></tr>
+        <tr><td>Rear fence</td><td>1.83 m, three sides</td>
+            <td>Standard built height; plot plan shows a proposed fence line</td>
+            <td>Large. Removing it returns 5.5 h of December sun to the back lawn</td></tr>
+        <tr><td>Deck</td><td>3.96 × 4.0 m</td>
+            <td>Width is the 13 ft deck nailer on the rear elevation</td>
+            <td>Small, and confined to the deck</td></tr>
+        <tr><td>Neighbouring houses</td><td>omitted</td>
+            <td>Measured by running the model both ways, not assumed</td>
+            <td>0.7 h in June and 0.1 h in December on the driveway</td></tr>
+        <tr><td>Trees</td><td>omitted</td>
+            <td>Two required by the City landscaping condition</td>
+            <td>Negligible at planting size; deciduous stock is bare in melt season</td></tr>
+      </tbody>
+    </table>
+    <p class="src flag">Every figure on this page carries the assumptions above.
+    The fence is the only one that changes a conclusion.</p>
+  </div>
+
+  <footer>
+    First Light · computed in this browser from the survey drawings.
+    Solar engine validated against Edmonton's published solstice day lengths to
+    within ten seconds. Source and method at the project repository. Standalone build - everything on this page, including the survey geometry, is embedded in this single file.
+  </footer>
+
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* First Light - standalone build, generated by tools/build-standalone.mjs
+   Generated 2026-09-10. Do not edit by hand;
+   edit src/ and rebuild. */
+(function () {
+"use strict";
+window.__FIRST_LIGHT_DATA__ = {
+  site: {"id":"sw-edmonton-zll-lot","label":"A zero-lot-line lot in southwest Edmonton","source":{"document":"Preliminary plot plan prepared by an Alberta land surveyor","scale":"1:300","note":"Preliminary, for siting purposes only. Parcel identifiers and civic address removed for publication."},"builder":"Cantiro Homes","model":"Family Spaces 24 Prairie (Standard)","geometry_units":"metres","lot":{"width_m":8.922,"depth_m":35.001,"area_m2":312.27,"corners":[[0,0],[8.922,0],[8.922,35.001],[0,35.001]]},"house":{"footprint":[[0.06,26.617],[7.384,26.617],[7.384,5.62],[1.288,5.62],[1.288,13.663],[0.06,13.663]],"foundation_area_m2":143.9,"sheet_house_area_m2":151.62,"cantilever":{"width_m":6.25,"projection_m":1.22,"note":"Second floor projects over the inset garage wall on the zero-lot-line side. Above roughly 3 m the massing is the full lot-width rectangle."},"coverage_pct":46.08,"setbacks_m":{"front":5.62,"rear":8.384,"west":0.06,"east":1.538}},"orientation":{"front_azimuth_deg":114.42,"north_arrow_cw_from_page_up_deg":65.58,"datum_note":"Bearing read from the plan's north symbol. Alberta subdivision plans are referenced to 3TM grid north; grid convergence at this longitude is about 0.3°, which is below the resolution of the drawing."}},
+  building: {"model":"Cantiro Family Spaces 24 Craftsman","architectural_set":"Builder architectural set, 17 sheets","floor_area_sq_ft":2489,"units":"metres","_note":"Every height below is traced to a printed dimension on a specific sheet. Values marked derived are arithmetic on those dimensions. The one assumption is main_floor_above_grade - the plot plan is preliminary and says finished-floor elevation is set at final plot.","storeys":{"basement":{"foundation_wall_height_m":2.819,"source":"Sheet 7 Foundation Plan: FOUNDATION HT 8'-3\", upgraded to 9'-3\" by change order 6","ceiling_height_m":2.743,"finished_area_sq_ft":731,"slab_area_sq_ft":902},"main":{"ceiling_height_m":2.769,"source":"Sheet 3 Main Floor Plan: MAIN FLOOR AREA H: 9'-1\"","area_sq_ft":1070},"second":{"ceiling_height_m":2.464,"source":"Sheet 6 Second Floor Plan: SECOND FLOOR AREA H: 8'-1\"","area_sq_ft":1494}},"heights_above_main_floor":{"midpoint_of_peak_m":6.858,"midpoint_source":"Sheet 1 Front Elevation, dimension 22'-6\" labelled 0.99/6.86","top_of_peak_m":7.849,"top_source":"Sheet 1 Front Elevation, dimension 25'-9\" labelled 7.85","eave_m":5.867,"eave_derivation":"2 x midpoint - ridge. Edmonton measures building height to the midpoint between eave and ridge, so the eave follows from the two printed dimensions.","eave_cross_check":"Storey stack gives 2.769 main + 0.406 floor system (16\" eng. joists, sheet 7) + 2.464 second = 5.639 m to the top of the second-floor ceiling. The 0.228 m remainder is top plate and truss heel, which is the expected order. The two routes agree.","roof_rise_m":1.982,"roof_pitch_cross_check":"6:12 over a 3.66 m half-width gives 1.83 m of rise; the extra 0.15 m is fascia and heel. Consistent with the 12/6 pitch marker on sheets 1 and 4."},"main_floor_above_grade_m":0.65,"main_floor_above_grade_status":"RESOLVED as a standard assumption. The plot plan defers finished floor to final plot, so it is derived two ways and the two agree. (1) Entry stack: sheet 2 shows a 3-rise step with a 4-rise side onto a precast concrete veranda; three exterior risers at the usual 185 mm is 0.555 m, plus the veranda-to-threshold sill of roughly 0.09 m gives 0.65 m. (2) Foundation stack: top of concrete sits 0.24 m above finished grade, which is standard practice and above the 0.15 m code minimum, plus the 16 inch engineered floor system (0.406 m) from sheet 7, giving 0.65 m. Plausible range 0.55-0.80 m; sensitivity is 0.65 m of midwinter shadow per 0.15 m of height.","derived_above_grade":{"eave_m":6.517,"ridge_m":8.499},"roof":{"form":"gable to the street, hip to the rear","ridge_runs":"along the long axis of the house, front to rear","main_pitch":"6:12","secondary_pitches":["5:12"],"source":"Sheets 1-4 elevations"},"glazing":{"front_facade":"upper floor 2 windows; main floor window, top-lite front door with transom, garage door","rear_facade":"upper floor 2 windows; main floor patio door plus two large window assemblies","left_facade":"NO WINDOWS - blank wall, soffit vents only (sheet 2)","right_facade":"NO WINDOWS - blank wall, soffit vents only (sheet 3)","significance":"This is a zero-lot-line skinny home: both long walls are windowless. Every window in the house faces either the front or the rear, so the frontage bearing alone determines interior daylight.","spec":"All windows triple pane, low-E coating, argon filled, U-value <= 1.6, ER rating >= 25, Zone 7A (sheet 1)"},"deck":{"width_m":3.962,"depth_m":4,"width_source":"Sheet 4 Rear Elevation: DECK NAILER 13'-0\"","depth_status":"RESOLVED as a standard assumption. Width is the 13 ft deck nailer on sheet 4; depth taken as 4.0 m, matching the owner's square-deck intent and leaving 4.38 m of open lawn behind it within the 8.38 m rear yard.","surface_below_main_floor_m":0.2,"position":"centred on the rear wall at the patio door"},"room_orientation":{"_note":"Builder left/right are as seen facing the front of the house.","rear_facing":["kitchen","dining","living room","primary bedroom","ensuite"],"front_facing":["garage","den","foyer","family entrance","bedroom 2","bedroom 3","kids room","main bath"],"source":"Sheets 3 and 6 floor plans, garage at the street end"},"fence":{"height_m":1.83,"extent":"rear yard, three sides, returning to the house at the rear corners","status":"RESOLVED as a standard assumption. 6 ft is the standard built height for an Edmonton rear-yard fence and the plot plan carries a proposed fence line. This is the single largest lever on the rear yard: removing it returns 5.5 h of December sun to the back lawn."},"trees":{"count":2,"shrubs":6,"status":"Omitted from the model. Required by the City landscaping condition on the plot plan. At planting size their shading is negligible, and deciduous stock is bare through the entire melt season."}}
+};
+/* ---- src/solar.js ---- */
+const __mod_solar = (function () {
+/**
+ * Solar position and event times.
+ *
+ * Implements the NOAA solar calculator (Meeus, "Astronomical Algorithms",
+ * ch. 25 and 28) rather than the usual day-of-year cosine approximation.
+ * The difference matters at this latitude: the cosine form errs by up to
+ * half a degree in declination, and dropping the equation of time shifts
+ * clock times by up to a quarter of an hour, which is enough to move a
+ * shadow edge several metres across a 35 m lot.
+ *
+ * Angles are degrees. Azimuth is measured clockwise from true north.
+ * Times are JavaScript Date objects in UTC; local presentation is the
+ * caller's problem.
+ */
+
+const RAD = Math.PI / 180;
+const DEG = 180 / Math.PI;
+
+/** Apparent elevation of the solar centre at sunrise/sunset: half the solar
+ *  disc (0.267°) plus mean atmospheric refraction at the horizon (0.567°). */
+const SUNRISE_ELEVATION = -0.833;
+
+function julianDay(date) {
+  return date.getTime() / 86400000 + 2440587.5;
+}
+
+function julianCentury(jd) {
+  return (jd - 2451545) / 36525;
+}
+
+const geomMeanLongSun = (t) =>
+  (((280.46646 + t * (36000.76983 + t * 0.0003032)) % 360) + 360) % 360;
+
+const geomMeanAnomSun = (t) => 357.52911 + t * (35999.05029 - 0.0001537 * t);
+
+const eccentEarthOrbit = (t) => 0.016708634 - t * (0.000042037 + 0.0000001267 * t);
+
+function sunEqOfCentre(t) {
+  const m = geomMeanAnomSun(t) * RAD;
+  return (
+    Math.sin(m) * (1.914602 - t * (0.004817 + 0.000014 * t)) +
+    Math.sin(2 * m) * (0.019993 - 0.000101 * t) +
+    Math.sin(3 * m) * 0.000289
+  );
+}
+
+const sunTrueLong = (t) => geomMeanLongSun(t) + sunEqOfCentre(t);
+
+const sunAppLong = (t) =>
+  sunTrueLong(t) - 0.00569 - 0.00478 * Math.sin((125.04 - 1934.136 * t) * RAD);
+
+const meanObliqEcliptic = (t) =>
+  23 + (26 + (21.448 - t * (46.815 + t * (0.00059 - t * 0.001813))) / 60) / 60;
+
+const obliqCorr = (t) =>
+  meanObliqEcliptic(t) + 0.00256 * Math.cos((125.04 - 1934.136 * t) * RAD);
+
+/** Solar declination, degrees. */
+function declination(t) {
+  return Math.asin(Math.sin(obliqCorr(t) * RAD) * Math.sin(sunAppLong(t) * RAD)) * DEG;
+}
+
+/** Equation of time, minutes (apparent solar time minus mean solar time). */
+function equationOfTime(t) {
+  const eps = obliqCorr(t) * RAD;
+  const l0 = geomMeanLongSun(t) * RAD;
+  const e = eccentEarthOrbit(t);
+  const m = geomMeanAnomSun(t) * RAD;
+  const y = Math.tan(eps / 2) ** 2;
+
+  const etime =
+    y * Math.sin(2 * l0) -
+    2 * e * Math.sin(m) +
+    4 * e * y * Math.sin(m) * Math.cos(2 * l0) -
+    0.5 * y * y * Math.sin(4 * l0) -
+    1.25 * e * e * Math.sin(2 * m);
+
+  return 4 * etime * DEG;
+}
+
+/** Atmospheric refraction correction, degrees, for a true elevation. */
+function refraction(elevation) {
+  if (elevation > 85) return 0;
+  const te = Math.tan(elevation * RAD);
+  let r;
+  if (elevation > 5) {
+    r = 58.1 / te - 0.07 / te ** 3 + 0.000086 / te ** 5;
+  } else if (elevation > -0.575) {
+    r = 1735 + elevation * (-518.2 + elevation * (103.4 + elevation * (-12.79 + elevation * 0.711)));
+  } else {
+    r = -20.772 / te;
+  }
+  return r / 3600;
+}
+
+/**
+ * Horizon dip from observer elevation above sea level, degrees.
+ * Adds a few minutes of daylight at Edmonton's ~700 m.
+ */
+function horizonDip(elevationMetres = 0) {
+  return elevationMetres > 0 ? 0.0347 * Math.sqrt(elevationMetres) : 0;
+}
+
+/**
+ * Sun position for an instant.
+ * @returns {{elevation:number, apparentElevation:number, azimuth:number,
+ *            declination:number, equationOfTime:number, hourAngle:number}}
+ */
+function sunPosition(date, latitude, longitude) {
+  const t = julianCentury(julianDay(date));
+  const decl = declination(t);
+  const eqTime = equationOfTime(t);
+
+  // Minutes past local midnight, UTC-based.
+  const utcMinutes =
+    date.getUTCHours() * 60 + date.getUTCMinutes() + date.getUTCSeconds() / 60;
+
+  let trueSolarTime = (utcMinutes + eqTime + 4 * longitude) % 1440;
+  if (trueSolarTime < 0) trueSolarTime += 1440;
+
+  let hourAngle = trueSolarTime / 4 - 180;
+  if (hourAngle < -180) hourAngle += 360;
+
+  const latR = latitude * RAD;
+  const declR = decl * RAD;
+  const haR = hourAngle * RAD;
+
+  const cosZenith =
+    Math.sin(latR) * Math.sin(declR) + Math.cos(latR) * Math.cos(declR) * Math.cos(haR);
+  const zenith = Math.acos(Math.min(1, Math.max(-1, cosZenith))) * DEG;
+  const elevation = 90 - zenith;
+
+  let azimuth;
+  const denom = Math.cos(latR) * Math.sin(zenith * RAD);
+  if (Math.abs(denom) > 1e-9) {
+    let c = (Math.sin(latR) * Math.cos(zenith * RAD) - Math.sin(declR)) / denom;
+    c = Math.min(1, Math.max(-1, c));
+    azimuth = hourAngle > 0 ? (Math.acos(c) * DEG + 180) % 360 : (540 - Math.acos(c) * DEG) % 360;
+  } else {
+    azimuth = latitude > 0 ? 180 : 0;
+  }
+
+  return {
+    elevation,
+    apparentElevation: elevation + refraction(elevation),
+    azimuth,
+    declination: decl,
+    equationOfTime: eqTime,
+    hourAngle,
+  };
+}
+
+/** Hour angle at which the sun reaches a given elevation, degrees, or null. */
+function hourAngleAtElevation(latitude, decl, targetElevation) {
+  const latR = latitude * RAD;
+  const declR = decl * RAD;
+  const cosH =
+    (Math.cos((90 - targetElevation) * RAD) - Math.sin(latR) * Math.sin(declR)) /
+    (Math.cos(latR) * Math.cos(declR));
+  if (cosH > 1 || cosH < -1) return null; // sun stays below / above all day
+  return Math.acos(cosH) * DEG;
+}
+
+function utcMidnight(date) {
+  return Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+}
+
+/**
+ * Sunrise, solar noon and sunset for a calendar day.
+ *
+ * The hour angle is solved at local solar noon and then refined once at the
+ * event time, because declination moves measurably across a long summer day
+ * at this latitude.
+ *
+ * @param {Date} date        any instant on the day of interest (UTC date part)
+ * @param {number} latitude  degrees north
+ * @param {number} longitude degrees east (negative for west)
+ * @param {number} elevationMetres observer elevation above sea level
+ * @returns {{sunrise:Date|null, solarNoon:Date, sunset:Date|null,
+ *            dayLengthMinutes:number, polar:'day'|'night'|null}}
+ */
+function sunTimes(date, latitude, longitude, elevationMetres = 0) {
+  const midnight = utcMidnight(date);
+  const target = SUNRISE_ELEVATION - horizonDip(elevationMetres);
+
+  const noonGuess = julianCentury(julianDay(new Date(midnight + 12 * 3600000)));
+  const solarNoonMinutes = 720 - 4 * longitude - equationOfTime(noonGuess);
+  const solarNoon = new Date(midnight + solarNoonMinutes * 60000);
+
+  const solveEvent = (sign) => {
+    let minutes = solarNoonMinutes;
+    for (let i = 0; i < 2; i++) {
+      const t = julianCentury(julianDay(new Date(midnight + minutes * 60000)));
+      const ha = hourAngleAtElevation(latitude, declination(t), target);
+      if (ha === null) return null;
+      minutes = 720 - 4 * (longitude + sign * ha) - equationOfTime(t);
+    }
+    return new Date(midnight + minutes * 60000);
+  };
+
+  const sunrise = solveEvent(1);
+  const sunset = solveEvent(-1);
+
+  let polar = null;
+  if (sunrise === null) {
+    const t = julianCentury(julianDay(solarNoon));
+    polar = 90 - Math.abs(latitude - declination(t)) > target ? 'day' : 'night';
+  }
+
+  return {
+    sunrise,
+    solarNoon,
+    sunset,
+    dayLengthMinutes:
+      sunrise && sunset ? (sunset - sunrise) / 60000 : polar === 'day' ? 1440 : 0,
+    polar,
+  };
+}
+
+/**
+ * Sample the sun's track across a day at a fixed cadence.
+ * Returns only steps where the sun is above the horizon.
+ */
+function sunTrack(date, latitude, longitude, stepMinutes = 10) {
+  const midnight = utcMidnight(date);
+  const out = [];
+  for (let m = 0; m < 1440; m += stepMinutes) {
+    const at = new Date(midnight + m * 60000);
+    const p = sunPosition(at, latitude, longitude);
+    if (p.apparentElevation > 0) out.push({ time: at, ...p });
+  }
+  return out;
+}
+
+return { SUNRISE_ELEVATION, julianDay, julianCentury, declination, equationOfTime, refraction, horizonDip, sunPosition, sunTimes, sunTrack };
+})();
+
+/* ---- src/site-geometry.js ---- */
+const __mod_site_geometry = (function () {
+/**
+ * Site geometry in lot coordinates.
+ *
+ * Origin is the front-west lot corner as emitted by tools/extract_plot_geometry.py.
+ *   +x runs along the frontage toward the east boundary
+ *   +y runs from the front property line toward the rear
+ *   +z is up
+ *
+ * The lot's frontage bearing rotates this frame onto the compass. Everything
+ * downstream works in lot coordinates and asks this module to convert a sun
+ * azimuth into a direction vector, so no other file has to know the bearing.
+ */
+
+const RAD = Math.PI / 180;
+
+class SiteModel {
+  /**
+   * @param {object} site      parsed data/site.json
+   * @param {object} building  parsed data/building.json
+   * @param {object} [opts]
+   * @param {boolean} [opts.fence=true]      model the proposed fence line
+   * @param {number}  [opts.fenceHeight=1.83] fence height, metres (6 ft)
+   * @param {boolean} [opts.neighbours=false] model the two flanking houses
+   */
+  constructor(site, building, opts = {}) {
+    this.site = site;
+    this.building = building;
+    this.opts = { fence: true, fenceHeight: 1.83, neighbours: false, ...opts };
+
+    this.lotWidth = site.lot.width_m;
+    this.lotDepth = site.lot.depth_m;
+    this.frontAzimuth = site.orientation.front_azimuth_deg;
+
+    // Compass bearing of each lot axis.
+    this.axisAzimuthX = (this.frontAzimuth - 90 + 360) % 360;
+    this.axisAzimuthY = (this.frontAzimuth + 180) % 360;
+
+    this.footprint = site.house.footprint;
+    this.houseMinX = Math.min(...this.footprint.map((p) => p[0]));
+    this.houseMaxX = Math.max(...this.footprint.map((p) => p[0]));
+    this.houseMinY = Math.min(...this.footprint.map((p) => p[1]));
+    this.houseMaxY = Math.max(...this.footprint.map((p) => p[1]));
+
+    this.eave = building.derived_above_grade.eave_m;
+    this.ridge = building.derived_above_grade.ridge_m;
+    this.ridgeX = (this.houseMinX + this.houseMaxX) / 2;
+    this.halfWidth = (this.houseMaxX - this.houseMinX) / 2;
+
+    // Lot falls toward the street: rear design grades average 90.61, front
+    // 89.715 on the plot plan's local datum, so 0.895 m over the 35 m depth.
+    this.grade = { fallMetres: 0.895 };
+
+    // The house sits on one finished-floor elevation, referenced to the grade
+    // at its own front wall - it does not follow the slope of the lot.
+    this.houseDatum = this.groundHeight(this.houseMinY);
+  }
+
+  /** Design grade at a given depth into the lot, metres above the front corner. */
+  groundHeight(y) {
+    return (this.grade.fallMetres * y) / this.lotDepth;
+  }
+
+  /** Unit vector pointing at the sun, in lot coordinates. */
+  sunVector(azimuthDeg, elevationDeg) {
+    const c = Math.cos(elevationDeg * RAD);
+    return {
+      x: c * Math.cos((azimuthDeg - this.axisAzimuthX) * RAD),
+      y: c * Math.cos((azimuthDeg - this.axisAzimuthY) * RAD),
+      z: Math.sin(elevationDeg * RAD),
+    };
+  }
+
+  /** Is (x, y) inside the house footprint? Ray-crossing test. */
+  insideFootprint(x, y) {
+    const p = this.footprint;
+    let inside = false;
+    for (let i = 0, j = p.length - 1; i < p.length; j = i++) {
+      const [xi, yi] = p[i];
+      const [xj, yj] = p[j];
+      if ((yi > y) !== (yj > y) && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
+  }
+
+  /**
+   * Absolute height of the top of whatever occupies (x, y), or null if nothing
+   * does. Heights are on the same datum as groundHeight().
+   *
+   * Roof form: a gable whose ridge runs the length of the house, hipped over
+   * the last half-width at the rear, matching sheets 1 to 4. The garage end is
+   * treated as part of the same gable - the front gables on sheet 1 are
+   * decorative and sit below the main ridge.
+   */
+  obstructionHeight(x, y) {
+    if (this.insideFootprint(x, y)) {
+      const acrossFraction = 1 - Math.abs(x - this.ridgeX) / this.halfWidth;
+      let rise = (this.ridge - this.eave) * Math.max(0, acrossFraction);
+      const fromRear = this.houseMaxY - y;
+      if (fromRear < this.halfWidth) {
+        rise *= Math.max(0, fromRear / this.halfWidth); // rear hip
+      }
+      return this.houseDatum + this.eave + rise;
+    }
+
+    if (this.opts.neighbours) {
+      // Every lot in this zero-lot-line row is built the same way: the house
+      // sits 0.06 m off its own west boundary with a 1.54 m yard on the east.
+      // So the neighbour to the west presents a wall 1.60 m from ours, and the
+      // neighbour to the east sits 1.60 m the other way.
+      const w = this.houseMaxX - this.houseMinX;
+      const westEast = this.houseMinX - this.site.house.setbacks_m.east - this.site.lot.width_m + this.lotWidth;
+      const spans = [
+        [-this.site.house.setbacks_m.east - w, -this.site.house.setbacks_m.east],
+        [this.lotWidth + this.site.house.setbacks_m.west,
+         this.lotWidth + this.site.house.setbacks_m.west + w],
+      ];
+      for (const [x0, x1] of spans) {
+        if (x >= x0 && x <= x1 && y >= this.houseMinY && y <= this.houseMaxY) {
+          const half = (x1 - x0) / 2;
+          const mid = (x0 + x1) / 2;
+          let rise = (this.ridge - this.eave) * Math.max(0, 1 - Math.abs(x - mid) / half);
+          const fromRear = this.houseMaxY - y;
+          if (fromRear < half) rise *= Math.max(0, fromRear / half);
+          return this.houseDatum + this.eave + rise;
+        }
+      }
+    }
+
+    if (this.opts.fence) {
+      const t = 0.12; // fence line sits on the lot boundary
+      const onSide = x < t || x > this.lotWidth - t;
+      const onRear = y > this.lotDepth - t;
+      // Rear yard only, three sides: the fence returns to the house at the
+      // rear corners, which is how this row is fenced. Nothing across the
+      // frontage and nothing alongside the house.
+      if ((onSide && y > this.houseMaxY) || onRear) {
+        return this.groundHeight(y) + this.opts.fenceHeight;
+      }
+    }
+
+    return null;
+  }
+
+  /** Named ground zones, in lot coordinates. Rectangles, [x0, y0, x1, y1]. */
+  zones() {
+    const f = this.footprint;
+    const garageWestX = Math.max(...f.filter((p) => p[1] === this.houseMinY).map((p) => p[0])) === this.houseMaxX
+      ? Math.min(...f.filter((p) => p[1] === this.houseMinY).map((p) => p[0]))
+      : this.houseMinX;
+    const deckHalf = this.building.deck.width_m / 2;
+    const deckCentre = (this.houseMinX + this.houseMaxX) / 2;
+
+    return {
+      driveway: {
+        label: 'Driveway',
+        rect: [garageWestX, 0, this.houseMaxX, this.houseMinY],
+        note: 'Between the garage door and the front property line.',
+      },
+      front_walk: {
+        label: 'Front walk and entry',
+        rect: [0, 0, garageWestX, this.houseMinY],
+        note: 'The strip beside the garage that reaches the front door.',
+      },
+      deck: {
+        label: 'Rear deck',
+        rect: [deckCentre - deckHalf, this.houseMaxY, deckCentre + deckHalf,
+               this.houseMaxY + this.building.deck.depth_m],
+        note: 'Sized from the 13 ft deck nailer on the rear elevation.',
+      },
+      back_yard: {
+        label: 'Back yard beyond the deck',
+        rect: [0, this.houseMaxY + this.building.deck.depth_m, this.lotWidth, this.lotDepth],
+        note: 'Open lawn between the deck and the rear property line.',
+      },
+      side_yard_east: {
+        label: 'East side yard',
+        rect: [this.houseMaxX, this.houseMinY, this.lotWidth, this.houseMaxY],
+        note: '1.54 m strip under the maintenance easement.',
+      },
+    };
+  }
+
+  /** Regular sample grid over the open ground of the lot. */
+  cells(spacing = 0.5) {
+    const out = [];
+    for (let y = spacing / 2; y < this.lotDepth; y += spacing) {
+      for (let x = spacing / 2; x < this.lotWidth; x += spacing) {
+        if (this.insideFootprint(x, y)) continue;
+        out.push({ x, y, z: this.groundHeight(y) });
+      }
+    }
+    return out;
+  }
+}
+
+return { SiteModel };
+})();
+
+/* ---- src/shading.js ---- */
+const __mod_shading = (function () {
+/**
+ * Shading and insolation.
+ *
+ * The expensive part of a sun study is asking, for every patch of ground and
+ * every minute of the year, whether anything is in the way. Doing that
+ * directly is millions of ray tests. Instead we compute each ground cell's
+ * horizon profile once: for each compass bearing, the elevation the sun has
+ * to clear before that patch is lit. After that, any instant is a lookup -
+ * find the bearing, compare elevations - so a full year at ten-minute
+ * resolution costs about as much as a single day used to.
+ *
+ * The profile is also what gives us a sky view factor, which the diffuse
+ * component and the melt model both need.
+ */
+
+const {sunPosition} = __mod_solar;
+const RAD = Math.PI / 180;
+const DEG = 180 / Math.PI;
+
+const AZIMUTH_BINS = 120; // 3 degrees
+const MARCH_STEP = 0.25; // metres
+const MARCH_LIMIT = 45; // metres - beyond the lot, nothing we model can shade
+
+/**
+ * Horizon profile for one cell: elevation angle, degrees, of the highest
+ * obstruction in each azimuth bin. Bin i spans bearings centred on
+ * i * 360 / AZIMUTH_BINS in lot-frame degrees measured from +y.
+ */
+function horizonProfile(model, cell) {
+  const profile = new Float32Array(AZIMUTH_BINS);
+
+  for (let i = 0; i < AZIMUTH_BINS; i++) {
+    const theta = (i * 360) / AZIMUTH_BINS;
+    const dx = Math.sin(theta * RAD);
+    const dy = Math.cos(theta * RAD);
+    let worst = 0;
+
+    for (let t = MARCH_STEP; t < MARCH_LIMIT; t += MARCH_STEP) {
+      const x = cell.x + dx * t;
+      const y = cell.y + dy * t;
+      if (x < -2 || x > model.lotWidth + 2 || y < -2 || y > model.lotDepth + 2) break;
+      const top = model.obstructionHeight(x, y);
+      if (top === null) continue;
+      const angle = Math.atan2(top - cell.z, t) * DEG;
+      if (angle > worst) worst = angle;
+    }
+    profile[i] = worst;
+  }
+  return profile;
+}
+
+/** Convert a compass azimuth to the lot-frame bearing the profile is indexed by. */
+function lotBearing(model, azimuthDeg) {
+  return ((azimuthDeg - model.axisAzimuthY) % 360 + 360) % 360;
+}
+
+/** Is the cell in direct sun, given a profile and a sun position? */
+function isLit(model, profile, azimuthDeg, elevationDeg) {
+  if (elevationDeg <= 0) return false;
+  const bearing = lotBearing(model, azimuthDeg);
+  const f = (bearing / 360) * AZIMUTH_BINS;
+  const i0 = Math.floor(f) % AZIMUTH_BINS;
+  const i1 = (i0 + 1) % AZIMUTH_BINS;
+  const w = f - Math.floor(f);
+  const horizon = profile[i0] * (1 - w) + profile[i1] * w;
+  return elevationDeg > horizon;
+}
+
+/**
+ * Sky view factor: the fraction of the hemisphere the cell can see.
+ * Uniform-sky weighting, integrated over the azimuth bins.
+ */
+function skyViewFactor(profile) {
+  let sum = 0;
+  for (let i = 0; i < profile.length; i++) {
+    const h = Math.max(0, profile[i]) * RAD;
+    sum += Math.cos(h) ** 2; // fraction of a vertical slice above the horizon
+  }
+  return sum / profile.length;
+}
+
+// ---------------------------------------------------------------------------
+// Clear-sky irradiance
+// ---------------------------------------------------------------------------
+
+const SOLAR_CONSTANT = 1367; // W/m^2
+
+/** Earth-sun distance correction for the day of year. */
+function eccentricityCorrection(date) {
+  const start = Date.UTC(date.getUTCFullYear(), 0, 1);
+  const doy = (date.getTime() - start) / 86400000 + 1;
+  return 1 + 0.033 * Math.cos((2 * Math.PI * doy) / 365.25);
+}
+
+/**
+ * Clear-sky direct normal irradiance, W/m^2.
+ *
+ * Kasten-Young air mass with a pressure correction for site elevation, and
+ * the Meinel broadband transmittance. This is a simple model by design: the
+ * absolute level is rescaled later against measured sunshine and radiation,
+ * so what matters here is that the shape against solar elevation is right.
+ */
+function clearSkyDNI(date, elevationDeg, siteElevationM = 700) {
+  if (elevationDeg <= 0) return 0;
+  const airMass =
+    1 / (Math.sin(elevationDeg * RAD) + 0.50572 * (elevationDeg + 6.07995) ** -1.6364);
+  const pressureRatio = Math.exp(-siteElevationM / 8434);
+  const m = airMass * pressureRatio;
+  return SOLAR_CONSTANT * eccentricityCorrection(date) * 0.7 ** m ** 0.678;
+}
+
+/** Clear-sky diffuse on a horizontal surface, W/m^2. Liu-Jordan style estimate. */
+function clearSkyDiffuse(date, elevationDeg, siteElevationM = 700) {
+  if (elevationDeg <= 0) return 0;
+  const dni = clearSkyDNI(date, elevationDeg, siteElevationM);
+  return 0.1 * dni * Math.sin(elevationDeg * RAD);
+}
+
+// ---------------------------------------------------------------------------
+// Accumulation
+// ---------------------------------------------------------------------------
+
+/**
+ * Walk a day at a fixed cadence and accumulate, for every cell, the hours of
+ * direct sun and the clear-sky direct energy landing on the horizontal.
+ *
+ * @returns {{sunHours:Float32Array, directWhPerM2:Float32Array, steps:number}}
+ */
+function accumulateDay(model, cells, profiles, date, lat, lon, stepMinutes = 10) {
+  const n = cells.length;
+  const sunHours = new Float32Array(n);
+  const directWh = new Float32Array(n);
+  const hoursPerStep = stepMinutes / 60;
+  const midnight = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+
+  let steps = 0;
+  for (let m = 0; m < 1440; m += stepMinutes) {
+    const at = new Date(midnight + m * 60000);
+    const p = sunPosition(at, lat, lon);
+    if (p.apparentElevation <= 0) continue;
+    steps++;
+
+    const dni = clearSkyDNI(at, p.apparentElevation);
+    const horizontal = dni * Math.sin(p.apparentElevation * RAD);
+
+    for (let c = 0; c < n; c++) {
+      if (isLit(model, profiles[c], p.azimuth, p.apparentElevation)) {
+        sunHours[c] += hoursPerStep;
+        directWh[c] += horizontal * hoursPerStep;
+      }
+    }
+  }
+  return { sunHours, directWhPerM2: directWh, steps };
+}
+
+/** Mean of an array over the cell indices belonging to a zone. */
+function zoneMean(values, indices) {
+  if (!indices.length) return 0;
+  let s = 0;
+  for (const i of indices) s += values[i];
+  return s / indices.length;
+}
+
+/** Indices of cells falling inside a rectangle [x0, y0, x1, y1]. */
+function cellsInRect(cells, rect) {
+  const [x0, y0, x1, y1] = rect;
+  const out = [];
+  for (let i = 0; i < cells.length; i++) {
+    const c = cells[i];
+    if (c.x >= x0 && c.x <= x1 && c.y >= y0 && c.y <= y1) out.push(i);
+  }
+  return out;
+}
+
+return { AZIMUTH_BINS, horizonProfile, lotBearing, isLit, skyViewFactor, clearSkyDNI, clearSkyDiffuse, accumulateDay, zoneMean, cellsInRect };
+})();
+
+/* ---- src/climate.js ---- */
+const __mod_climate = (function () {
+/**
+ * Daily weather for the site.
+ *
+ * Primary source is the Open-Meteo historical archive, which serves ERA5
+ * reanalysis back to 1940, needs no API key, and sends CORS headers, so the
+ * browser can call it directly. Nothing is bundled and nothing goes stale.
+ *
+ * The melt model needs only three things per day: mean temperature, the
+ * daily range, and precipitation. Everything else it derives from the
+ * shading model.
+ */
+
+const ARCHIVE = 'https://archive-api.open-meteo.com/v1/archive';
+
+/**
+ * Fetch a daily series.
+ *
+ * @param {number} latitude
+ * @param {number} longitude
+ * @param {string} startDate  ISO date, e.g. '2015-01-01'
+ * @param {string} endDate
+ * @returns {Promise<{source:string, days:Array<{date:string, tMean:number,
+ *          tMax:number, tMin:number, precipMm:number}>}>}
+ */
+async function fetchDaily(latitude, longitude, startDate, endDate) {
+  const url =
+    `${ARCHIVE}?latitude=${latitude}&longitude=${longitude}` +
+    `&start_date=${startDate}&end_date=${endDate}` +
+    `&daily=temperature_2m_mean,temperature_2m_max,temperature_2m_min,precipitation_sum,shortwave_radiation_sum` +
+    `&timezone=America%2FEdmonton`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Open-Meteo returned ${res.status}`);
+  const json = await res.json();
+  const d = json.daily;
+  if (!d || !d.time) throw new Error('Open-Meteo response had no daily block');
+
+  return {
+    source: 'Open-Meteo historical archive (ERA5 reanalysis)',
+    days: d.time.map((date, i) => ({
+      date,
+      tMean: d.temperature_2m_mean[i],
+      tMax: d.temperature_2m_max[i],
+      tMin: d.temperature_2m_min[i],
+      precipMm: d.precipitation_sum[i] ?? 0,
+      // MJ/m^2/day of measured global horizontal radiation, converted to a
+      // daily mean in W/m^2 so it can be compared with the clear-sky model.
+      ghiWm2: ((d.shortwave_radiation_sum?.[i] ?? 0) * 1e6) / 86400,
+    })),
+  };
+}
+
+/**
+ * Average a multi-year daily series into one representative year, keyed by
+ * month and day. Leap days are dropped. Averaging the temperature is what we
+ * want for a typical-year answer; averaging away the day-to-day variance is
+ * NOT, because melt only responds to days above freezing, so the model is run
+ * per year and the results averaged instead. See computeMeltAcrossYears().
+ */
+function groupBySnowYear(days) {
+  const years = new Map();
+  for (const d of days) {
+    const y = Number(d.date.slice(0, 4));
+    const m = Number(d.date.slice(5, 7));
+    // A snow year runs August to July, so accumulation is not cut in half by
+    // the calendar. Label it by the winter it contains: 2023-24.
+    const start = m >= 8 ? y : y - 1;
+    const key = `${start}-${String((start + 1) % 100).padStart(2, '0')}`;
+    if (!years.has(key)) years.set(key, []);
+    years.get(key).push(d);
+  }
+  return years;
+}
+
+// ---------------------------------------------------------------------------
+// Offline fallback
+// ---------------------------------------------------------------------------
+
+/**
+ * Edmonton monthly climate normals, used only when the archive is
+ * unreachable. Mean daily temperature in degrees C and monthly precipitation
+ * in mm, approximating the 1991-2020 normals for the Edmonton area.
+ *
+ * These are a fallback, not a result. Anything computed from them is marked
+ * provisional, because a degree-day melt model responds to the number of days
+ * above freezing, which monthly means cannot tell you.
+ */
+const EDMONTON_NORMALS = {
+  tMean: [-11.7, -9.3, -3.3, 5.1, 11.3, 15.1, 17.1, 16.2, 10.9, 4.2, -5.8, -10.9],
+  precipMm: [22, 15, 18, 27, 50, 88, 92, 62, 44, 22, 19, 21],
+  // Day-to-day standard deviation of mean temperature, by month. Prairie
+  // winters swing hard; summers do not.
+  tSigma: [8.5, 8.0, 6.5, 5.0, 4.0, 3.5, 3.0, 3.2, 4.2, 5.5, 7.0, 8.0],
+  diurnalRange: [9.5, 10.5, 11.0, 12.0, 12.5, 12.0, 12.5, 12.5, 12.0, 11.0, 9.5, 9.0],
+  // Clearness index: measured global horizontal over clear-sky. Edmonton is a
+  // sunny place by Canadian standards, but low winter sun and ice fog pull the
+  // cold months down.
+  clearness: [0.45, 0.52, 0.55, 0.55, 0.54, 0.53, 0.57, 0.56, 0.52, 0.48, 0.42, 0.41],
+};
+
+/** Deterministic PRNG so fallback runs are reproducible. */
+function mulberry32(seed) {
+  return function () {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+/**
+ * Synthesise a plausible daily year from the normals.
+ *
+ * Temperature is a first-order autoregressive process around a smooth
+ * seasonal mean, which is the standard shape of a simple weather generator:
+ * it reproduces both the monthly mean and the persistence of prairie cold
+ * snaps and thaws, so the count of above-freezing days is realistic even
+ * though the individual days are invented.
+ */
+function synthesiseYear(year, seed = 20260908) {
+  const rand = mulberry32(seed);
+  const gauss = () => {
+    const u = Math.max(1e-9, rand()), v = rand();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  };
+
+  const days = [];
+  const phi = 0.72; // day-to-day persistence
+  let anomaly = 0;
+
+  for (let m = 0; m < 12; m++) {
+    const inMonth = new Date(Date.UTC(year, m + 1, 0)).getUTCDate();
+    const sigma = EDMONTON_NORMALS.tSigma[m];
+    const prevM = (m + 11) % 12, nextM = (m + 1) % 12;
+
+    for (let d = 1; d <= inMonth; d++) {
+      // Smooth the seasonal mean across month boundaries.
+      const f = (d - 0.5) / inMonth - 0.5;
+      const base = EDMONTON_NORMALS.tMean[m];
+      const neighbour = f < 0 ? EDMONTON_NORMALS.tMean[prevM] : EDMONTON_NORMALS.tMean[nextM];
+      const tSeasonal = base + (neighbour - base) * Math.abs(f);
+
+      anomaly = phi * anomaly + Math.sqrt(1 - phi * phi) * sigma * gauss();
+      const tMean = tSeasonal + anomaly;
+      const range = EDMONTON_NORMALS.diurnalRange[m];
+
+      // Wet days: roughly a third of days carry the month's precipitation.
+      const wet = rand() < 0.33;
+      const precipMm = wet ? (EDMONTON_NORMALS.precipMm[m] / (inMonth * 0.33)) * (0.4 + 1.6 * rand()) : 0;
+
+      days.push({
+        date: `${year}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
+        tMean: +tMean.toFixed(1),
+        tMax: +(tMean + range / 2).toFixed(1),
+        tMin: +(tMean - range / 2).toFixed(1),
+        precipMm: +precipMm.toFixed(1),
+        clearness: EDMONTON_NORMALS.clearness[m],
+      });
+    }
+  }
+  return { source: 'SYNTHETIC fallback from Edmonton monthly normals - provisional', days };
+}
+
+return { fetchDaily, groupBySnowYear, EDMONTON_NORMALS, synthesiseYear };
+})();
+
+/* ---- src/snowmelt.js ---- */
+const __mod_snowmelt = (function () {
+/**
+ * Snowpack and melt, per patch of ground.
+ *
+ * A plain degree-day model melts every square metre of a property at the same
+ * rate, which is the thing we are trying to disprove. This is a surface energy
+ * balance instead, because it can be checked against physics rather than
+ * against a tuned coefficient:
+ *
+ *   melt energy  Q = (1 - albedo) * (direct + diffuse * skyView)   shortwave
+ *                  + c0 + c1 * T                                   the rest
+ *   melt depth   M = max(0, Q) * 86400 / 334000                    mm w.e./day
+ *
+ * 334 kJ is what it takes to melt a kilogram of ice, and a kilogram of water
+ * spread over a square metre is one millimetre. So the conversion is not a
+ * fitted parameter, it is the latent heat of fusion.
+ *
+ * The shortwave term is where the geometry enters: the shading engine gives a
+ * different direct-beam figure for every cell, so the driveway and the shaded
+ * back yard receive genuinely different amounts of energy on the same day.
+ *
+ * The second term lumps together net longwave, sensible and latent heat, which
+ * a full energy balance would need humidity, wind and cloud base to resolve.
+ * Linearising them against air temperature is the standard simplification and
+ * is where most of this model's uncertainty lives; c0 and c1 are stated here
+ * rather than buried so they can be argued with.
+ */
+
+/** Latent heat of fusion, expressed as the energy needed per mm of melt. */
+const ENERGY_PER_MM = 334000; // J per m^2 per mm water equivalent
+
+/** Net longwave loss under an open winter sky, W/m^2. */
+const LONGWAVE_OFFSET = -20;
+
+/** Combined turbulent and longwave sensitivity to air temperature, W/m^2/degC. */
+const TEMPERATURE_COEFF = 12;
+
+/** Albedo of snow: fresh, fully aged, and the e-folding time in days. */
+const ALBEDO_FRESH = 0.85;
+const ALBEDO_AGED = 0.50;
+const ALBEDO_DECAY_DAYS = 8;
+
+/** A snowfall of at least this much water equivalent resets the surface. */
+const REFRESH_MM = 2.0;
+
+/** Albedo of the ground under the snow: dark, whether paving or wet turf. */
+const ALBEDO_GROUND = 0.20;
+
+/**
+ * Water equivalent above which a patch is continuous white. Below it the pack
+ * goes patchy and bare ground starts showing through.
+ *
+ * This threshold is what makes a sunny surface clear weeks before a shaded one
+ * rather than a day before. Melt lowers the pack, the pack goes patchy, the
+ * effective albedo collapses from about 0.7 toward 0.2, and the surface starts
+ * absorbing three times the energy it did - so it runs away. The shaded yard
+ * never reaches the threshold, stays uniformly white, and keeps reflecting.
+ * Without this feedback every surface on the property melts together, which is
+ * not what an Edmonton spring looks like.
+ */
+const SNOW_FULL_COVER_MM = 15;
+
+const RAIN_THRESHOLD = 2.0;
+const SNOW_THRESHOLD = 0.0;
+
+/** Fraction of a day's precipitation falling as snow. */
+function snowFraction(tMean) {
+  if (tMean <= SNOW_THRESHOLD) return 1;
+  if (tMean >= RAIN_THRESHOLD) return 0;
+  return (RAIN_THRESHOLD - tMean) / (RAIN_THRESHOLD - SNOW_THRESHOLD);
+}
+
+function albedoFor(ageDays) {
+  return ALBEDO_AGED + (ALBEDO_FRESH - ALBEDO_AGED) * Math.exp(-ageDays / ALBEDO_DECAY_DAYS);
+}
+
+/**
+ * Run one snow year, cell by cell.
+ *
+ * @param {Array} days   daily weather in order, ideally August to July so the
+ *                       accumulation season is not split by the calendar
+ * @param {object} rad
+ * @param {Array<Float32Array>} rad.direct  [day][cell] potential direct beam on
+ *                              the horizontal, daily mean W/m^2
+ * @param {Float32Array} rad.diffuse        [day] clear-sky diffuse, W/m^2
+ * @param {Float32Array} rad.skyView        [cell] sky view factor
+ * @param {Float32Array} rad.cloudFactor    [day] measured over clear-sky radiation
+ */
+function runSeason(days, rad, cellCount) {
+  const swe = new Float32Array(cellCount);
+  const peak = new Float32Array(cellCount);
+  const snowDays = new Int16Array(cellCount);
+  const meltOut = new Int16Array(cellCount).fill(-1);
+  const hadPack = new Uint8Array(cellCount);
+  const sweByDay = [];
+  let age = 0;
+
+  for (let d = 0; d < days.length; d++) {
+    const { tMean, precipMm } = days[d];
+    const accumulation = precipMm * snowFraction(tMean);
+    age = accumulation >= REFRESH_MM ? 0 : age + 1;
+
+    const snowAlbedo = albedoFor(age);
+    const cloud = rad.cloudFactor[d];
+    const direct = rad.direct[d];
+    const diffuse = rad.diffuse[d];
+    const thermal = LONGWAVE_OFFSET + TEMPERATURE_COEFF * tMean;
+
+    for (let c = 0; c < cellCount; c++) {
+      if (accumulation > 0) swe[c] += accumulation;
+
+      if (swe[c] > 0) {
+        // Fractional snow cover, and the albedo that follows from it.
+        const cover = Math.min(1, swe[c] / SNOW_FULL_COVER_MM);
+        const albedo = cover * snowAlbedo + (1 - cover) * ALBEDO_GROUND;
+        const shortwave = (1 - albedo) * cloud * (direct[c] + diffuse * rad.skyView[c]);
+        const q = shortwave + thermal;
+        if (q > 0) swe[c] = Math.max(0, swe[c] - (q * 86400) / ENERGY_PER_MM);
+      }
+
+      if (swe[c] > peak[c]) peak[c] = swe[c];
+      if (swe[c] > 0) {
+        snowDays[c]++;
+        if (swe[c] > 20) hadPack[c] = 1;
+        meltOut[c] = -1; // must be the final clearing, not a midwinter thaw
+      } else if (hadPack[c] && meltOut[c] === -1) {
+        meltOut[c] = d;
+      }
+    }
+    sweByDay.push(Float32Array.from(swe));
+  }
+
+  return { sweByDay, meltOutDayIndex: meltOut, snowDays, peakSweMm: peak };
+}
+
+/**
+ * Days when meltwater is likely to refreeze overnight: snow on the ground, the
+ * day above freezing, the night below it. This is what turns a sunny driveway
+ * into an ice rink, so melting early is only an advantage if the surface also
+ * drains.
+ */
+function freezeThawDays(days, sweByDay, cellIndices) {
+  let count = 0;
+  for (let d = 0; d < days.length; d++) {
+    if (!(days[d].tMax > 0 && days[d].tMin < 0)) continue;
+    if (cellIndices.some((c) => sweByDay[d][c] > 0)) count++;
+  }
+  return count;
+}
+
+/** Melt-out statistics over a set of cells. */
+function zoneMeltOut(meltOutDayIndex, cellIndices) {
+  const vals = cellIndices.map((c) => meltOutDayIndex[c]).filter((v) => v >= 0);
+  if (!vals.length) return null;
+  vals.sort((a, b) => a - b);
+  return {
+    median: vals[Math.floor(vals.length / 2)],
+    earliest: vals[0],
+    latest: vals[vals.length - 1],
+    clearedFraction: vals.length / cellIndices.length,
+  };
+}
+
+return { LONGWAVE_OFFSET, TEMPERATURE_COEFF, ALBEDO_FRESH, ALBEDO_AGED, ALBEDO_DECAY_DAYS, ALBEDO_GROUND, SNOW_FULL_COVER_MM, snowFraction, albedoFor, runSeason, freezeThawDays, zoneMeltOut };
+})();
+
+/* ---- src/scene3d.js ---- */
+const __mod_scene3d = (function () {
+/**
+ * The 3D scene.
+ *
+ * Not a decorative render. The sun is placed from the same NOAA solar position
+ * the rest of the project uses, the massing is the surveyed footprint extruded
+ * to the dimensioned eave and ridge, the shadow is cast by the renderer, and
+ * the snow on the ground is the melt model's output cell by cell at half-metre
+ * resolution.
+ *
+ * The twelve arcs overhead are the sun's actual track on the fifteenth of each
+ * month at this latitude. The spread between the December arc and the June arc
+ * is the whole argument of the project in one picture.
+ */
+
+const {sunPosition} = __mod_solar;
+const M_PER_CELL = 0.5;
+const PX_PER_M = 12;
+const DOME = 46;
+
+function createScene(container, opts) {
+  const { model, cells, lat, lon } = opts;
+  const THREE = window.THREE;
+  if (!THREE) throw new Error('three.js did not load');
+
+  const W = model.lotWidth, D = model.lotDepth, PAD = 9;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  container.appendChild(renderer.domElement);
+  Object.assign(renderer.domElement.style,
+    { display: 'block', width: '100%', touchAction: 'none', cursor: 'grab' });
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(40, 16 / 9, 0.5, 500);
+  const target = new THREE.Vector3(W / 2, 2.5, -D / 2);
+
+  const sky = new THREE.Mesh(
+    new THREE.SphereGeometry(220, 32, 16),
+    new THREE.MeshBasicMaterial({ color: 0x9dc4e8, side: THREE.BackSide })
+  );
+  scene.add(sky);
+
+  // ---- orbit (r128 ships no OrbitControls) --------------------------------
+  const orbit = { az: -0.66, el: 0.55, r: 62 };
+  function placeCamera() {
+    orbit.el = Math.max(0.08, Math.min(1.4, orbit.el));
+    camera.position.set(
+      target.x + orbit.r * Math.cos(orbit.el) * Math.sin(orbit.az),
+      target.y + orbit.r * Math.sin(orbit.el),
+      target.z + orbit.r * Math.cos(orbit.el) * Math.cos(orbit.az)
+    );
+    camera.lookAt(target);
+  }
+  let drag = null;
+  const dom = renderer.domElement;
+  dom.addEventListener('pointerdown', (e) => {
+    drag = { x: e.clientX, y: e.clientY };
+    dom.style.cursor = 'grabbing';
+    dom.setPointerCapture(e.pointerId);
+  });
+  dom.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    orbit.az -= (e.clientX - drag.x) * 0.006;
+    orbit.el += (e.clientY - drag.y) * 0.005;
+    drag = { x: e.clientX, y: e.clientY };
+    placeCamera();
+  });
+  const release = () => { drag = null; dom.style.cursor = 'grab'; };
+  dom.addEventListener('pointerup', release);
+  dom.addEventListener('pointercancel', release);
+  dom.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    orbit.r = Math.max(26, Math.min(130, orbit.r + e.deltaY * 0.05));
+    placeCamera();
+  }, { passive: false });
+
+  // ---- surrounding land ---------------------------------------------------
+  const landMat = new THREE.MeshLambertMaterial({ color: 0x8fa86a });
+  const land = new THREE.Mesh(new THREE.CircleGeometry(150, 64), landMat);
+  land.rotation.x = -Math.PI / 2;
+  land.position.set(W / 2, -0.06, -D / 2);
+  land.receiveShadow = true;
+  scene.add(land);
+
+  // ---- lot surface, painted from the model --------------------------------
+  const gw = W + PAD * 2, gd = D + PAD * 2;
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.round(gw * PX_PER_M);
+  canvas.height = Math.round(gd * PX_PER_M);
+  const ctx = canvas.getContext('2d');
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.anisotropy = 4;
+
+  const lotMesh = new THREE.Mesh(
+    new THREE.PlaneGeometry(gw, gd),
+    new THREE.MeshLambertMaterial({ map: tex })
+  );
+  lotMesh.rotation.x = -Math.PI / 2;
+  lotMesh.position.set(W / 2, 0, -D / 2);
+  lotMesh.receiveShadow = true;
+  scene.add(lotMesh);
+
+  const SUN_STOPS = [[203, 216, 176], [232, 214, 150], [216, 168, 96], [176, 92, 28]];
+  const zoneRects = model.zones();
+
+  function paintGround(field, mode) {
+    const px = (x) => (x + PAD) * PX_PER_M;
+    const pz = (y) => (D - y + PAD) * PX_PER_M;
+    const size = M_PER_CELL * PX_PER_M + 1;
+
+    // Bare ground first, always. Snow is an overlay drawn only where the model
+    // says there is snow - otherwise a lot with no snow left on it still comes
+    // out white, which is what a snow-coloured base fill would give you in July.
+    let mean = 0;
+    for (let i = 0; i < field.length; i++) mean += field[i] || 0;
+    mean = field.length ? mean / field.length : 0;
+    const wintry = mode === 'snow' ? Math.min(1, mean / 8) : 0;
+
+    ctx.fillStyle = '#8FA86A';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Paving reads darker than lawn, and damp while snow is still melting off.
+    ctx.fillStyle = wintry > 0.05 ? '#6E6A62' : '#8C8A83';
+    for (const k of ['driveway', 'front_walk']) {
+      const [x0, y0, x1, y1] = zoneRects[k].rect;
+      ctx.fillRect(px(x0), pz(y1), (x1 - x0) * PX_PER_M, (y1 - y0) * PX_PER_M);
+    }
+
+    const max = mode === 'snow' ? 45 : Math.max(0.001, ...field);
+    for (let i = 0; i < cells.length; i++) {
+      const c = cells[i];
+      const t = Math.max(0, Math.min(1, (field[i] || 0) / max));
+      const X = px(c.x - 0.25), Y = pz(c.y + 0.25);
+      if (mode === 'snow') {
+        if (t > 0.002) {
+          // Patchy at low depth, solid white once the pack covers the ground.
+          const cover = Math.min(1, t * 4);
+          ctx.fillStyle = `rgba(252,253,255,${(0.30 + 0.70 * cover).toFixed(3)})`;
+          ctx.fillRect(X, Y, size, size);
+        }
+      } else {
+        const s = t * 3, k = Math.min(2, Math.floor(s)), f = s - k;
+        const col = SUN_STOPS[k].map((v, j) => Math.round(v + (SUN_STOPS[k + 1][j] - v) * f));
+        ctx.fillStyle = `rgb(${col.join(',')})`;
+        ctx.fillRect(X, Y, size, size);
+      }
+    }
+
+    ctx.strokeStyle = '#5C5A54';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(px(0), pz(D), W * PX_PER_M, D * PX_PER_M);
+    tex.needsUpdate = true;
+
+    // The land beyond the lot follows the same snow the lot has, so the scene
+    // does not sit as a green island in a white field or the reverse.
+    const g = [0x8f, 0xa8, 0x6a], w = [0xdc, 0xde, 0xd9];
+    const blend = g.map((v, i) => Math.round(v + (w[i] - v) * wintry));
+    landMat.color.set((blend[0] << 16) | (blend[1] << 8) | blend[2]);
+  }
+
+  // ---- house --------------------------------------------------------------
+  const house = new THREE.Group();
+  scene.add(house);
+
+  const MAT = {
+    siding: new THREE.MeshLambertMaterial({ color: 0xb9b3a4 }),
+    gable: new THREE.MeshLambertMaterial({ color: 0x8a8375 }),
+    stone: new THREE.MeshLambertMaterial({ color: 0x746a5e }),
+    roof: new THREE.MeshLambertMaterial({ color: 0x43464b }),
+    snow: new THREE.MeshLambertMaterial({ color: 0xfbfcfe }),
+    glass: new THREE.MeshLambertMaterial({ color: 0x2f4356 }),
+    door: new THREE.MeshLambertMaterial({ color: 0x27384a }),
+    garage: new THREE.MeshLambertMaterial({ color: 0xe6e2d9 }),
+    deck: new THREE.MeshLambertMaterial({ color: 0xa87f4e }),
+    fence: new THREE.MeshLambertMaterial({ color: 0xb08d5f }),
+  };
+
+  const base = model.houseDatum;
+  const shape = new THREE.Shape();
+  model.footprint.forEach(([x, y], i) => (i ? shape.lineTo(x, -y) : shape.moveTo(x, -y)));
+
+  function addExtrude(h, mat, y) {
+    const m = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(shape, { depth: h, bevelEnabled: false }), mat);
+    m.rotation.x = Math.PI / 2;
+    m.position.y = y + h;
+    m.castShadow = true; m.receiveShadow = true;
+    house.add(m);
+  }
+  addExtrude(model.eave, MAT.siding, base);
+  addExtrude(0.95, MAT.stone, base + 0.003);
+
+  const rise = model.ridge - model.eave;
+  const x0 = model.houseMinX, x1 = model.houseMaxX;
+  const y0 = model.houseMinY, y1 = model.houseMaxY;
+  const xm = model.ridgeX, hip = y1 - model.halfWidth;
+  const top = base + model.eave;
+  const OVER = 0.35;
+
+  function roofGeometry(lift) {
+    const v = [];
+    const P = (x, y, h) => [x, top + h + lift, -y];
+    const tri = (a, b, c) => v.push(...a, ...b, ...c);
+    const ye0 = y0 - OVER, ye1 = y1 + OVER;
+    for (const s of [-1, 1]) {
+      const xe = s < 0 ? x0 - OVER : x1 + OVER;
+      tri(P(xe, ye0, 0), P(xm, ye0, rise), P(xm, hip, rise));
+      tri(P(xe, ye0, 0), P(xm, hip, rise), P(xe, hip, 0));
+      tri(P(xe, hip, 0), P(xm, hip, rise), P(xm, ye1, 0));
+      tri(P(xe, hip, 0), P(xm, ye1, 0), P(xe, ye1, 0));
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+    g.computeVertexNormals();
+    return g;
+  }
+
+  const roof = new THREE.Mesh(roofGeometry(0), MAT.roof);
+  roof.castShadow = true; roof.receiveShadow = true;
+  house.add(roof);
+
+  const roofSnow = new THREE.Mesh(roofGeometry(0.10), MAT.snow);
+  roofSnow.castShadow = true;
+  roofSnow.visible = false;
+  house.add(roofSnow);
+
+  // Front gable face, so the house reads as a house rather than a box.
+  const gableGeo = new THREE.BufferGeometry();
+  gableGeo.setAttribute('position', new THREE.Float32BufferAttribute(
+    [x0, top, -y0, x1, top, -y0, xm, top + rise, -y0], 3));
+  gableGeo.computeVertexNormals();
+  const gable = new THREE.Mesh(gableGeo, MAT.gable);
+  gable.castShadow = true;
+  house.add(gable);
+
+  /**
+   * Openings, front and rear only. Both side elevations on the drawing set are
+   * blank - soffit vents and nothing else - which is exactly why orientation
+   * decides everything on this house.
+   */
+  function opening(w, h, cx, cy, faceZ, mat, d = 0.16) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+    m.position.set(cx, cy, faceZ);
+    house.add(m);
+  }
+  const FRONT = -(y0 - 0.06), REAR = -(y1 + 0.06);
+  const mainSill = base + 2.05, upperSill = base + 4.6;
+
+  opening(4.6, 2.15, x1 - 2.9, base + 1.08, FRONT, MAT.garage, 0.22);
+  opening(1.05, 2.10, x0 + 1.75, base + 1.05, FRONT, MAT.door, 0.2);
+  opening(1.30, 1.20, x0 + 0.85, mainSill, FRONT, MAT.glass);
+  opening(1.50, 1.25, x0 + 1.75, upperSill, FRONT, MAT.glass);
+  opening(2.40, 1.25, x1 - 2.30, upperSill, FRONT, MAT.glass);
+
+  opening(2.20, 2.10, xm, base + 1.05, REAR, MAT.glass, 0.2);
+  opening(2.30, 1.50, x0 + 1.60, mainSill, REAR, MAT.glass);
+  opening(1.90, 1.50, x1 - 1.60, mainSill, REAR, MAT.glass);
+  opening(1.60, 1.25, x0 + 1.80, upperSill, REAR, MAT.glass);
+  opening(2.40, 1.25, x1 - 2.10, upperSill, REAR, MAT.glass);
+
+  const dk = model.building.deck;
+  const deck = new THREE.Mesh(new THREE.BoxGeometry(dk.width_m, 0.2, dk.depth_m), MAT.deck);
+  deck.position.set((x0 + x1) / 2, base + 0.65 - dk.surface_below_main_floor_m,
+    -(y1 + dk.depth_m / 2));
+  deck.castShadow = true; deck.receiveShadow = true;
+  house.add(deck);
+
+  const fence = new THREE.Group();
+  scene.add(fence);
+  function buildFence() {
+    fence.clear();
+    if (!model.opts.fence) return;
+    const h = model.opts.fenceHeight;
+    const seg = (cx, cy, w, d) => {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), MAT.fence);
+      m.position.set(cx, model.groundHeight(cy) + h / 2, -cy);
+      m.castShadow = true; m.receiveShadow = true;
+      fence.add(m);
+    };
+    const yA = model.houseMaxY, len = D - yA;
+    seg(0.06, yA + len / 2, 0.12, len);
+    seg(W - 0.06, yA + len / 2, 0.12, len);
+    seg(W / 2, D - 0.06, W, 0.12);
+  }
+  buildFence();
+
+  // ---- twelve sun paths ---------------------------------------------------
+  const paths = new THREE.Group();
+  scene.add(paths);
+  const arcs = [];
+
+  function sunPoint(p, r = DOME) {
+    const v = model.sunVector(p.azimuth, p.apparentElevation);
+    return new THREE.Vector3(target.x + v.x * r, Math.max(0.25, v.z * r), target.z - v.y * r);
+  }
+
+  function buildArcs() {
+    paths.clear();
+    arcs.length = 0;
+    for (let m = 0; m < 12; m++) {
+      const midnight = Date.UTC(2026, m, 15);
+      const pts = [];
+      for (let t = 0; t <= 1440; t += 10) {
+        const p = sunPosition(new Date(midnight + t * 60000), lat, lon);
+        if (p.apparentElevation > -0.5) pts.push(sunPoint(p));
+      }
+      if (pts.length < 2) continue;
+      const line = new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({ color: 0x7f8fa0, transparent: true, opacity: 0.3 })
+      );
+      paths.add(line);
+      arcs[m] = line;
+    }
+  }
+  buildArcs();
+
+  function highlightMonth(m) {
+    for (let i = 0; i < arcs.length; i++) {
+      const line = arcs[i];
+      if (!line) continue;
+      const on = i === m;
+      line.material.color.set(on ? 0xe8912c : 0x7f8fa0);
+      line.material.opacity = on ? 1 : 0.26;
+    }
+  }
+
+  const sunBall = new THREE.Mesh(new THREE.SphereGeometry(1.5, 24, 16),
+    new THREE.MeshBasicMaterial({ color: 0xffc23d }));
+  const sunGlow = new THREE.Mesh(new THREE.SphereGeometry(3.0, 24, 16),
+    new THREE.MeshBasicMaterial({ color: 0xffd77a, transparent: true, opacity: 0.26 }));
+  scene.add(sunBall, sunGlow);
+
+  // ---- compass -----------------------------------------------------------
+  function labelSprite(text) {
+    const c = document.createElement('canvas');
+    c.width = 128; c.height = 64;
+    const g = c.getContext('2d');
+    g.fillStyle = '#2b2f36';
+    g.font = 'bold 42px Inter, sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    g.fillText(text, 64, 34);
+    const s = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: new THREE.CanvasTexture(c), transparent: true,
+    }));
+    s.scale.set(5, 2.5, 1);
+    return s;
+  }
+  for (const [text, azimuth] of [['N', 0], ['E', 90], ['S', 180], ['W', 270]]) {
+    const v = model.sunVector(azimuth, 0);
+    const s = labelSprite(text);
+    s.position.set(target.x + v.x * (DOME + 5), 2, target.z - v.y * (DOME + 5));
+    scene.add(s);
+  }
+
+  // ---- light -------------------------------------------------------------
+  const hemi = new THREE.HemisphereLight(0xcfe0f2, 0x7f8d63, 0.7);
+  scene.add(hemi);
+  const sun = new THREE.DirectionalLight(0xfff3e0, 1.05);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera,
+    { left: -45, right: 45, top: 45, bottom: -45, near: 1, far: 260 });
+  sun.target.position.copy(target);
+  scene.add(sun, sun.target);
+
+  function setSun(date) {
+    const p = sunPosition(date, lat, lon);
+    const up = p.apparentElevation > 0;
+    const v = model.sunVector(p.azimuth, Math.max(p.apparentElevation, 0.2));
+
+    sun.position.set(target.x + v.x * 120, Math.max(1, v.z * 120), target.z - v.y * 120);
+    sun.intensity = up ? 0.4 + 0.85 * Math.min(1, p.apparentElevation / 40) : 0;
+    hemi.intensity = up ? 0.7 : 0.3;
+
+    const at = sunPoint(p, DOME);
+    sunBall.position.copy(at);
+    sunGlow.position.copy(at);
+    sunBall.visible = up;
+    sunGlow.visible = up;
+
+    // The sky warms as the sun drops, and goes to dusk below the horizon.
+    const k = Math.max(0, Math.min(1, p.apparentElevation / 25));
+    sky.material.color.setHSL(0.58 - 0.045 * (1 - k), 0.45 + 0.15 * (1 - k),
+      up ? 0.60 + 0.13 * k : 0.32);
+    return p;
+  }
+
+  function resize() {
+    const w = container.clientWidth || 900;
+    const h = Math.round(w * (window.innerWidth < 900 ? 0.8 : 0.58));
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  placeCamera();
+
+  let raf = null;
+  (function loop() { renderer.render(scene, camera); raf = requestAnimationFrame(loop); })();
+
+  return {
+    setSun,
+    paintGround,
+    highlightMonth,
+    setRoofSnow(mm) { roofSnow.visible = mm > 3; },
+    rebuildFence: buildFence,
+    dispose() { cancelAnimationFrame(raf); renderer.dispose(); },
+  };
+}
+
+return { createScene };
+})();
+
+/* ---- src/app.js ---- */
+const __mod_app = (function () {
+/**
+ * First Light - report front end.
+ *
+ * Runs the same engine modules the command-line tools run. Nothing here is
+ * precomputed and pasted in; every figure on the page is calculated in the
+ * browser from data/site.json and data/building.json when the page loads.
+ *
+ * The one performance decision worth knowing: horizon profiles depend only on
+ * what the house and fence block, not on which way the lot points. So rotating
+ * the frontage needs no reprofiling, only re-accumulation, which is why the
+ * bearing slider in Figure 4 responds immediately while changing the fence
+ * shows a recompute.
+ */
+
+const {SiteModel} = __mod_site_geometry;
+const {horizonProfile, accumulateDay, cellsInRect, isLit, skyViewFactor, clearSkyDiffuse} = __mod_shading;
+const {sunTimes, sunPosition} = __mod_solar;
+const {synthesiseYear, groupBySnowYear, EDMONTON_NORMALS} = __mod_climate;
+const {runSeason} = __mod_snowmelt;
+const {createScene} = __mod_scene3d;
+// Neighbourhood centroid, deliberately rounded to ~1 km. At this latitude a
+// kilometre of longitude is under three seconds of solar time, so the results
+// are unchanged and the file does not carry a parcel-level fix.
+const LAT = 53.43;
+const LON = -113.66;
+const SPACING = 0.5;
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
+const SHORT = MONTHS.map((m) => m.slice(0, 3));
+
+const SHORT_LABEL = {
+  driveway: 'Driveway', front_walk: 'Front walk', deck: 'Rear deck',
+  back_yard: 'Back yard', side_yard_east: 'East side yard',
+};
+const shortName = (k, fallback) => SHORT_LABEL[k] || fallback;
+
+/**
+ * Push a set of direct labels apart so none overlap.
+ * Sort by position, walk down enforcing a minimum gap, then walk back up if
+ * the stack has run past the bottom of the plot.
+ */
+function deCollide(items, minGap, top, bottom) {
+  const out = [...items].sort((a, b) => a.y - b.y);
+  for (let i = 1; i < out.length; i++) {
+    if (out[i].y - out[i - 1].y < minGap) out[i].y = out[i - 1].y + minGap;
+  }
+  const overflow = out.length ? out[out.length - 1].y - bottom : 0;
+  if (overflow > 0) for (const it of out) it.y -= overflow;
+  for (const it of out) it.y = Math.max(top, it.y);
+  return out;
+}
+
+const SUN_RAMP = ['#F3EDE3', '#E6CFA8', '#D3A461', '#B45F1E'];
+const $ = (id) => document.getElementById(id);
+const fmtTime = new Intl.DateTimeFormat('en-CA', {
+  timeZone: 'America/Edmonton', hour: '2-digit', minute: '2-digit', hour12: false,
+});
+
+/* ------------------------------------------------------------------ helpers */
+
+function rampColour(t) {
+  const x = Math.max(0, Math.min(1, t)) * (SUN_RAMP.length - 1);
+  const i = Math.min(SUN_RAMP.length - 2, Math.floor(x));
+  const f = x - i;
+  const hex = (s) => [1, 3, 5].map((k) => parseInt(s.slice(k, k + 2), 16));
+  const a = hex(SUN_RAMP[i]), b = hex(SUN_RAMP[i + 1]);
+  const mix = a.map((v, k) => Math.round(v + (b[k] - v) * f));
+  return `rgb(${mix.join(',')})`;
+}
+
+const svgEl = (vb, inner, extra = '') =>
+  `<svg viewBox="${vb}" width="100%" preserveAspectRatio="xMidYMid meet" ${extra}>${inner}</svg>`;
+
+const esc = (s) => String(s).replace(/[<>&"]/g, (c) =>
+  ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+
+/* ------------------------------------------------------------------- state */
+
+const state = {
+  model: null, cells: null, profiles: null, zones: null, zoneIdx: null,
+  monthly: null, sweep: null, month: 11, bearing: null, fence: true,
+  scene: null, season: null, day: 200, minutes: 12 * 60, playing: false,
+  ground: 'snow',
+  site: null, building: null,
+};
+
+/* --------------------------------------------------------------- computing */
+
+function rebuildGeometry() {
+  state.model = new SiteModel(state.site, state.building, { fence: state.fence });
+  state.model.frontAzimuth = state.bearing;
+  state.model.axisAzimuthX = (state.bearing - 90 + 360) % 360;
+  state.model.axisAzimuthY = (state.bearing + 180) % 360;
+  state.cells = state.model.cells(SPACING);
+  state.profiles = state.cells.map((c) => horizonProfile(state.model, c));
+  state.zones = state.model.zones();
+  state.zoneIdx = Object.fromEntries(
+    Object.entries(state.zones).map(([k, z]) => [k, cellsInRect(state.cells, z.rect)])
+  );
+  state.sweep = null; // curves depend on the massing, so they are now stale
+}
+
+/** Re-point the lot without reprofiling. Profiles are bearing-independent. */
+function setBearing(deg) {
+  state.bearing = deg;
+  state.model.frontAzimuth = deg;
+  state.model.axisAzimuthX = (deg - 90 + 360) % 360;
+  state.model.axisAzimuthY = (deg + 180) % 360;
+}
+
+function monthField(monthIndex) {
+  const date = new Date(Date.UTC(2026, monthIndex, 15));
+  const { sunHours } = accumulateDay(state.model, state.cells, state.profiles, date, LAT, LON, 10);
+  return sunHours;
+}
+
+function computeMonthly() {
+  const out = { possible: [], zones: {} };
+  for (const k of Object.keys(state.zones)) out.zones[k] = [];
+  for (let m = 0; m < 12; m++) {
+    const date = new Date(Date.UTC(2026, m, 15));
+    out.possible.push(sunTimes(date, LAT, LON).dayLengthMinutes / 60);
+    const field = monthField(m);
+    for (const [k, idx] of Object.entries(state.zoneIdx)) {
+      out.zones[k].push(idx.reduce((a, c) => a + field[c], 0) / idx.length);
+    }
+  }
+  return out;
+}
+
+/* ------------------------------------------------------- the snow season */
+
+/**
+ * Run the melt model for one snow year and keep the daily snowpack for every
+ * cell, so the 3D ground can be scrubbed through the season.
+ *
+ * The weather here is synthesised from Edmonton's monthly normals, because a
+ * browser opened from a file cannot always reach the archive. Where the live
+ * Open-Meteo record is available the same model runs against observations; the
+ * geometry and the physics are identical either way.
+ */
+function computeSeason() {
+  const SAMPLE = 5;
+  const sampleDirect = [], sampleDiffuse = [];
+  for (let doy = 0; doy < 366; doy += SAMPLE) {
+    const date = new Date(Date.UTC(2026, 0, 1 + doy));
+    const { directWhPerM2 } = accumulateDay(state.model, state.cells, state.profiles, date, LAT, LON, 20);
+    sampleDirect.push(Float32Array.from(directWhPerM2, (wh) => wh / 24));
+    const midnight = Date.UTC(2026, 0, 1 + doy);
+    let dif = 0;
+    for (let m = 0; m < 1440; m += 20) {
+      const at = new Date(midnight + m * 60000);
+      const p = sunPosition(at, LAT, LON);
+      if (p.apparentElevation > 0) dif += clearSkyDiffuse(at, p.apparentElevation) / 3;
+    }
+    sampleDiffuse.push(dif / 24);
+  }
+
+  const a = synthesiseYear(2025, 11), b = synthesiseYear(2026, 22);
+  const days = groupBySnowYear([...a.days, ...b.days]).get('2025-26');
+  const skyView = Float32Array.from(state.profiles, skyViewFactor);
+
+  const doyOf = (iso) => {
+    const t = Date.parse(iso + 'T00:00:00Z');
+    return Math.floor((t - Date.UTC(new Date(t).getUTCFullYear(), 0, 1)) / 86400000);
+  };
+  const direct = [], diffuse = new Float32Array(days.length), cloud = new Float32Array(days.length);
+  for (let i = 0; i < days.length; i++) {
+    const doy = doyOf(days[i].date);
+    const j = Math.min(sampleDirect.length - 2, Math.floor(doy / SAMPLE));
+    const w = (doy - j * SAMPLE) / SAMPLE;
+    const out = new Float32Array(state.cells.length);
+    for (let c = 0; c < out.length; c++) {
+      out[c] = sampleDirect[j][c] * (1 - w) + sampleDirect[j + 1][c] * w;
+    }
+    direct.push(out);
+    diffuse[i] = sampleDiffuse[j] * (1 - w) + sampleDiffuse[j + 1] * w;
+    cloud[i] = (days[i].clearness ?? 0.5) / 0.72;
+  }
+
+  const season = runSeason(days, { direct, diffuse, skyView, cloudFactor: cloud }, state.cells.length);
+  return { days, ...season, doyOf };
+}
+
+/* ---------------------------------------------------------------- figure 1 */
+
+/** Clamp the scrub position; a stale index must never take the page down. */
+function currentDay() {
+  const days = state.season && state.season.days;
+  if (!days || !days.length) return null;
+  state.day = Math.max(0, Math.min(days.length - 1, state.day | 0));
+  return days[state.day];
+}
+
+function sceneDate() {
+  const day = currentDay();
+  if (!day) return new Date();
+  const iso = day.date;
+  const [y, m, d] = iso.split('-').map(Number);
+  // Local Edmonton clock time, converted to the UTC instant the engine wants.
+  const offset = (m > 3 && m < 11) ? 6 : 7;
+  return new Date(Date.UTC(y, m - 1, d, 0, state.minutes + offset * 60));
+}
+
+function renderScene() {
+  if (!state.scene || !state.season) return;
+  const day = currentDay();
+  if (!day) return;
+  const date = sceneDate();
+  const p = state.scene.setSun(date);
+
+  const month = Number(day.date.slice(5, 7)) - 1;
+  state.scene.highlightMonth(month);
+
+  if (state.ground === 'snow') {
+    state.scene.paintGround(state.season.sweByDay[state.day], 'snow');
+  } else {
+    state.scene.paintGround(monthField(month), 'sun');
+  }
+
+  const zoneSwe = (k) => {
+    const idx = state.zoneIdx[k];
+    return idx.reduce((a, c) => a + state.season.sweByDay[state.day][c], 0) / idx.length;
+  };
+  state.scene.setRoofSnow(zoneSwe('back_yard'));
+  const el = p.apparentElevation;
+  $('sceneSrc').innerHTML =
+    `${esc(day.date)} · ${String(Math.floor(state.minutes / 60)).padStart(2, '0')}:` +
+    `${String(state.minutes % 60).padStart(2, '0')} local · ` +
+    `sun ${el > 0 ? `${el.toFixed(1)}° above the horizon at bearing ${p.azimuth.toFixed(0)}°` : 'below the horizon'} · ` +
+    `air ${day.tMean.toFixed(1)} °C · snow depth: driveway ` +
+    `${(zoneSwe('driveway') / 2.8).toFixed(1)} cm, back yard ` +
+    `${(zoneSwe('back_yard') / 2.8).toFixed(1)} cm ` +
+    `<span class="flag">weather synthesised from Edmonton normals</span>`;
+}
+
+function renderPlan(monthIndex) {
+  const m = state.model;
+  const field = monthField(monthIndex);
+  const S = 15, PAD = 30, LEGEND = 250;
+  const W = m.lotWidth * S + PAD * 2 + LEGEND;
+  const H = m.lotDepth * S + PAD * 2 + 26;
+  const X = (x) => PAD + x * S;
+  const Y = (y) => PAD + (m.lotDepth - y) * S;
+  const max = Math.max(...field, 0.001);
+
+  let grid = '';
+  for (let i = 0; i < state.cells.length; i++) {
+    const c = state.cells[i];
+    grid += `<rect x="${X(c.x - SPACING / 2).toFixed(1)}" y="${Y(c.y + SPACING / 2).toFixed(1)}"
+      width="${(SPACING * S).toFixed(1)}" height="${(SPACING * S).toFixed(1)}"
+      fill="${rampColour(field[i] / max)}" shape-rendering="crispEdges"/>`;
+  }
+
+  const foot = m.footprint.map(([x, y]) => `${X(x).toFixed(1)},${Y(y).toFixed(1)}`).join(' ');
+
+  // North needle, above the legend so it cannot sit on top of the plan.
+  const phi = ((180 - state.bearing) * Math.PI) / 180;
+  const nx = X(m.lotWidth) + 52, ny = PAD + 34, L = 30;
+  const tip = [nx + Math.sin(phi) * L, ny - Math.cos(phi) * L];
+  const tail = [nx - Math.sin(phi) * L * 0.45, ny + Math.cos(phi) * L * 0.45];
+  const pp = [Math.cos(phi) * 3.6, Math.sin(phi) * 3.6];
+
+  // Legend: one row per zone, so no text ever lands on the drawing.
+  const lx = X(m.lotWidth) + 100;
+  let ly = PAD + 12;
+  const rows = Object.entries(state.zones).map(([k, z]) => {
+    const idx = state.zoneIdx[k];
+    const v = idx.length ? idx.reduce((a, c) => a + field[c], 0) / idx.length : 0;
+    const y = ly; ly += 30;
+    return `<rect x="${lx}" y="${y - 9}" width="16" height="12" fill="${rampColour(v / max)}"
+        stroke="#C9C3B6"/>
+      <text x="${lx + 24}" y="${y}" font-family="Inter,sans-serif" font-size="12.5" fill="#17181B"
+        >${esc(shortName(k, z.label))}</text>
+      <text x="${lx + 24}" y="${y + 14}" font-family="IBM Plex Mono,monospace" font-size="11.5"
+        fill="#575C66">${v.toFixed(1)} h</text>`;
+  }).join('');
+
+  const inner = `${grid}
+    <rect x="${X(0)}" y="${Y(m.lotDepth)}" width="${m.lotWidth * S}" height="${m.lotDepth * S}"
+      fill="none" stroke="#8B909B" stroke-width="1.5"/>
+    <polygon points="${foot}" fill="#F5F2EC" stroke="#17181B" stroke-width="1.5"/>
+    <text x="${X((m.houseMinX + m.houseMaxX) / 2)}" y="${Y((m.houseMinY + m.houseMaxY) / 2)}"
+      text-anchor="middle" font-family="Inter,sans-serif" font-size="12" fill="#17181B">House</text>
+    <polygon points="${tail[0] - pp[0]},${tail[1] - pp[1]} ${tip[0]},${tip[1]} ${tail[0] + pp[0]},${tail[1] + pp[1]}"
+      fill="#17181B"/>
+    <text x="${tail[0] - 13}" y="${tail[1] + 13}" font-family="Inter,sans-serif" font-size="11"
+      fill="#575C66">N</text>
+    <text x="${lx}" y="${PAD - 8}" font-family="Inter,sans-serif" font-size="11" fill="#8B909B"
+      >Direct sun, ${esc(MONTHS[monthIndex])}</text>
+    ${rows}
+    <text x="${X(m.lotWidth / 2)}" y="${H - 8}" text-anchor="middle" font-family="Inter,sans-serif"
+      font-size="11" fill="#8B909B">Frontage ${state.bearing.toFixed(2)}\u00b0 \u00b7 street at the bottom</text>`;
+
+  $('plan').classList.remove('busy');
+  $('plan').innerHTML = svgEl(`0 0 ${W} ${H}`, inner,
+    `role="img" aria-label="Site plan shaded by direct sun hours in ${MONTHS[monthIndex]}"
+     style="max-width:${W}px;display:block;margin:0 auto"`);
+}
+
+/** Hours a zone is more than half lit, within a local-time window. */
+function litHours(zoneKey, month, dayOfMonth, fromMin = 0, toMin = 1440) {
+  const idx = state.zoneIdx[zoneKey];
+  if (!idx || !idx.length) return 0;
+  const midnight = Date.UTC(2026, month, dayOfMonth);
+  const offset = (month > 2 && month < 10) ? 6 : 7; // local clock to UTC
+  let hours = 0;
+  for (let m = fromMin; m < toMin; m += 10) {
+    const at = new Date(midnight + (m + offset * 60) * 60000);
+    const p = sunPosition(at, LAT, LON);
+    if (p.apparentElevation <= 0) continue;
+    const share = idx.filter((i) =>
+      isLit(state.model, state.profiles[i], p.azimuth, p.apparentElevation)).length / idx.length;
+    if (share >= 0.5) hours += 1 / 6;
+  }
+  return hours;
+}
+
+/** The horticultural band a spot falls into, on growing-season average. */
+function sunCategory(hoursPerDay) {
+  if (hoursPerDay >= 6) return 'Full sun';
+  if (hoursPerDay >= 4) return 'Part sun';
+  if (hoursPerDay >= 2) return 'Part shade';
+  return 'Full shade';
+}
+
+/* ------------------------------------------------------- figure 3, garden */
+
+function renderGarden() {
+  const m = state.monthly;
+  const rows = Object.entries(state.zones).map(([k, z]) => {
+    const season = m.zones[k].slice(4, 9);          // May to September
+    const avg = season.reduce((a, b) => a + b, 0) / season.length;
+    const junePct = (100 * m.zones[k][5]) / m.possible[5];
+    const evening = litHours(k, 5, 21, 17 * 60, 23 * 60);
+    return { k, label: shortName(k, z.label), avg, junePct, evening, cat: sunCategory(avg) };
+  });
+
+  const head = '<thead><tr><th>Zone</th><th>May\u2013Sep, h/day</th>' +
+    '<th>June, share of daylight</th><th>Evening sun after 5pm</th><th>Planting</th></tr></thead>';
+  const body = rows.map((r) =>
+    `<tr><td>${esc(r.label)}</td><td>${r.avg.toFixed(1)}</td>` +
+    `<td>${Math.round(r.junePct)}%</td><td>${r.evening.toFixed(1)} h</td>` +
+    `<td>${r.cat}</td></tr>`).join('');
+  $('garden').innerHTML = head + `<tbody>${body}</tbody>`;
+
+  const back = rows.find((r) => r.k === 'back_yard');
+  const deck = rows.find((r) => r.k === 'deck');
+  const drivePct = Math.round((100 * m.zones.driveway[5]) / m.possible[5]);
+
+  const PLANTING = {
+    'Full sun': 'which is full sun by the usual horticultural definition - enough for ' +
+      'tomatoes, peppers, squash and most vegetables, as well as roses and sun perennials',
+    'Part sun': 'which is part sun - fine for herbs, leafy greens, beans and most ' +
+      'perennials, but short of what tomatoes and peppers want',
+    'Part shade': 'which is part shade - lettuce, spinach, hostas and ferns will do well, ' +
+      'fruiting vegetables will not',
+    'Full shade': 'which is full shade - shade perennials and ground cover only',
+  };
+
+  // At 8pm on the longest day the sun sits about ten degrees up, and a fence
+  // that height throws a shadow this long back across the yard.
+  const eveningShadow = (state.model.opts.fence ? state.model.opts.fenceHeight : 0)
+    / Math.tan(10 * Math.PI / 180);
+
+  const fenceNote = state.model.opts.fence
+    ? ` That last figure is lower than you would expect, and the reason is the fence. ` +
+      `By eight o'clock in June the sun is only about ten degrees above the horizon, and a ` +
+      `${state.model.opts.fenceHeight} m fence throws a ${eveningShadow.toFixed(0)} m shadow ` +
+      `back across the lawn - which is most of the ${(state.model.lotDepth - state.model.houseMaxY).toFixed(1)} m ` +
+      `you have behind the house. The deck keeps ${deck.evening.toFixed(1)} hours because it ` +
+      `sits further from the rear fence than the lawn does. Turn the fence off in Figure 5 and ` +
+      `watch what comes back.`
+    : '';
+
+  $('gardenProse').textContent =
+    `Through the growing season the back yard averages ${back.avg.toFixed(1)} hours of direct ` +
+    `sun a day, ${PLANTING[back.cat]}. In June it takes ${Math.round(back.junePct)} per cent of ` +
+    `the daylight available, against ${drivePct} per cent on the driveway. The two are not ` +
+    `competing for the same season: the driveway wins the winter, the back yard wins the ` +
+    `summer.` +
+    ` There is no morning sun behind the house in any month - your own house is in the way - ` +
+    `so the yard is an afternoon and evening space, and the beds that want morning light belong ` +
+    `along the east side.` +
+    ` After five o'clock on the longest day the lawn holds ${back.evening.toFixed(1)} hours of ` +
+    `direct sun and the deck ${deck.evening.toFixed(1)}.` + fenceNote;
+}
+
+/* ---------------------------------------------------------------- figure 2 */
+
+function renderChart() {
+  const W = 940, H = 380, L = 56, R = 132, T = 20, B = 40;
+  const monthly = state.monthly;
+  const max = Math.ceil(Math.max(...monthly.possible));
+  const px = (i) => L + (i / 11) * (W - L - R);
+  const py = (v) => H - B - (v / max) * (H - T - B);
+
+  const grid = Array.from({ length: max / 4 + 1 }, (_, i) => i * 4).map((v) =>
+    `<line x1="${L}" y1="${py(v)}" x2="${W - R}" y2="${py(v)}" stroke="#E3DFD6"/>
+     <text x="${L - 10}" y="${py(v) + 4}" text-anchor="end" font-family="IBM Plex Mono,monospace"
+       font-size="11" fill="#8B909B">${v}</text>`).join('');
+
+  const ticks = SHORT.map((s, i) =>
+    `<text x="${px(i)}" y="${H - B + 18}" text-anchor="middle" font-family="Inter,sans-serif"
+      font-size="11" fill="#8B909B">${s}</text>`).join('');
+
+  const line = (vals, colour, dash = '') =>
+    `<polyline points="${vals.map((v, i) => `${px(i)},${py(v)}`).join(' ')}"
+      fill="none" stroke="${colour}" stroke-width="${dash ? 1 : 2}"
+      stroke-dasharray="${dash}" stroke-linejoin="round"/>`;
+
+  const order = Object.keys(state.zones);
+  const colours = { driveway: '#B45F1E', front_walk: '#D3A461', deck: '#35506B',
+    back_yard: '#6E93B8', side_yard_east: '#A9B7C4' };
+
+  const series = order.map((k) => line(monthly.zones[k], colours[k] || '#8B909B')).join('');
+
+  const placed = deCollide([
+    { y: py(monthly.possible[11]) + 4, text: 'Daylight available', fill: '#8B909B' },
+    ...order.map((k) => ({
+      y: py(monthly.zones[k][11]) + 4,
+      text: shortName(k, state.zones[k].label),
+      fill: colours[k] || '#575C66',
+    })),
+  ], 17, T + 10, H - B);
+
+  const labels = placed.map((it) =>
+    `<text x="${W - R + 12}" y="${it.y}" font-family="Inter,sans-serif" font-size="12"
+      fill="${it.fill}">${esc(it.text)}</text>`).join('');
+
+  const inner = `${grid}
+    ${line(monthly.possible, '#C9C3B6', '3 3')}
+    ${series}${labels}${ticks}
+    <text x="${L - 10}" y="${T + 4}" text-anchor="end" font-family="Inter,sans-serif"
+      font-size="11" fill="#8B909B">hours</text>`;
+
+  $('chart').classList.remove('busy');
+  $('chart').innerHTML = svgEl(`0 0 ${W} ${H}`, inner,
+    'role="img" aria-label="Direct sun hours per zone through the year"');
+}
+
+/* ---------------------------------------------------------------- figure 3 */
+
+function renderTimeline() {
+  const date = new Date(Date.UTC(2026, 11, 21));
+  const t = sunTimes(date, LAT, LON);
+  const midnight = Date.UTC(2026, 11, 21);
+  const order = Object.keys(state.zones);
+
+  const bars = order.map((k) => {
+    const idx = state.zoneIdx[k];
+    const spans = [];
+    let open = null;
+    for (let mm = 0; mm < 1440; mm += 5) {
+      const at = new Date(midnight + mm * 60000);
+      const p = sunPosition(at, LAT, LON);
+      const lit = p.apparentElevation > 0 &&
+        idx.filter((i) => isLit(state.model, state.profiles[i], p.azimuth, p.apparentElevation))
+          .length / idx.length >= 0.5;
+      if (lit && open === null) open = mm;
+      if (!lit && open !== null) { spans.push([open, mm]); open = null; }
+    }
+    if (open !== null) spans.push([open, 1440]);
+    return { key: k, spans, total: spans.reduce((a, [s, e]) => a + (e - s), 0) / 60 };
+  });
+
+  const W = 900, rowH = 34, T = 34, L = 170, R = 70;
+  const H = T + bars.length * rowH + 16;
+  const x0 = 7 * 60, x1 = 18 * 60;
+  const px = (mins) => L + ((mins - x0) / (x1 - x0)) * (W - L - R);
+
+  const hours = [];
+  for (let h = 7; h <= 18; h++) {
+    hours.push(`<line x1="${px(h * 60)}" y1="${T - 8}" x2="${px(h * 60)}" y2="${H - 12}"
+      stroke="#E3DFD6"/><text x="${px(h * 60)}" y="${T - 14}" text-anchor="middle"
+      font-family="Inter,sans-serif" font-size="11" fill="#8B909B">${String(h).padStart(2, '0')}</text>`);
+  }
+
+  const riseSet = [t.sunrise, t.sunset].map((d) => {
+    const mins = Number(fmtTime.format(d).slice(0, 2)) * 60 + Number(fmtTime.format(d).slice(3, 5));
+    return `<line x1="${px(mins)}" y1="${T - 8}" x2="${px(mins)}" y2="${H - 12}"
+      stroke="#C9C3B6" stroke-dasharray="3 3"/>`;
+  }).join('');
+
+  const rows = bars.map((b, i) => {
+    const y = T + i * rowH;
+    const segs = b.spans.map(([s, e]) =>
+      `<rect x="${px(s)}" y="${y}" width="${Math.max(1, px(e) - px(s))}" height="16"
+        fill="#B45F1E"/>`).join('');
+    return `<text x="${L - 14}" y="${y + 12}" text-anchor="end" font-family="Inter,sans-serif"
+        font-size="13" fill="#17181B">${esc(state.zones[b.key].label)}</text>
+      <line x1="${L}" y1="${y + 8}" x2="${W - R}" y2="${y + 8}" stroke="#F5F2EC"/>
+      ${segs}
+      <text x="${W - R + 10}" y="${y + 12}" font-family="IBM Plex Mono,monospace"
+        font-size="12" fill="#575C66">${b.total.toFixed(1)} h</text>`;
+  }).join('');
+
+  $('timeline').classList.remove('busy');
+  $('timeline').innerHTML = svgEl(`0 0 ${W} ${H}`, hours.join('') + riseSet + rows,
+    'role="img" aria-label="Hours each zone is lit on 21 December"');
+
+  const drive = bars.find((b) => b.key === 'driveway');
+  const rise = fmtTime.format(t.sunrise), set = fmtTime.format(t.sunset);
+  const first = drive.spans.length ? fmtTime.format(new Date(midnight + drive.spans[0][0] * 60000)) : '-';
+  const last = drive.spans.length
+    ? fmtTime.format(new Date(midnight + drive.spans[drive.spans.length - 1][1] * 60000)) : '-';
+  $('winterProse').textContent =
+    `On the shortest day of the year the sun rises at ${rise} and sets at ${set}, ` +
+    `giving ${(t.dayLengthMinutes / 60).toFixed(1)} hours of daylight. The driveway is lit ` +
+    `from ${first} to ${last} - ${drive.total.toFixed(1)} of those hours. Winter sunrise here ` +
+    `is at bearing 130.4° against a frontage of ${state.bearing.toFixed(2)}°, so the sun comes ` +
+    `up almost square to the front of the house and tracks across it all morning. The back ` +
+    `yard, sixteen metres away, gets almost none of it.`;
+}
+
+/* ---------------------------------------------------------------- figure 4 */
+
+/**
+ * Sweep every frontage bearing once and cache the result. The curves depend on
+ * the massing, not on which way the lot currently points, so dragging the
+ * bearing slider only moves the marker - it does not recompute anything.
+ * Invalidated when the geometry changes.
+ */
+function computeSweep() {
+  const bearings = [];
+  for (let b = 0; b < 360; b += 10) bearings.push(b);
+  const saved = state.bearing;
+  const dec = {}, jun = {};
+  for (const k of Object.keys(state.zones)) { dec[k] = []; jun[k] = []; }
+
+  for (const b of bearings) {
+    setBearing(b);
+    for (const [mi, store] of [[11, dec], [5, jun]]) {
+      const field = monthField(mi);
+      for (const [k, idx] of Object.entries(state.zoneIdx)) {
+        store[k].push(idx.reduce((a, c) => a + field[c], 0) / idx.length);
+      }
+    }
+  }
+  setBearing(saved);
+  return { bearings, dec, jun };
+}
+
+function renderCompare() {
+  if (!state.sweep) state.sweep = computeSweep();
+  const { bearings, dec, jun } = state.sweep;
+  const saved = state.bearing;
+
+  const W = 900, H = 300, L = 52, R = 130, T = 20, B = 40;
+  const max = 18;
+  const px = (b) => L + (b / 350) * (W - L - R);
+  const py = (v) => H - B - (v / max) * (H - T - B);
+
+  const grid = [0, 4, 8, 12, 16].map((v) =>
+    `<line x1="${L}" y1="${py(v)}" x2="${W - R}" y2="${py(v)}" stroke="#E3DFD6"/>
+     <text x="${L - 10}" y="${py(v) + 4}" text-anchor="end" font-family="IBM Plex Mono,monospace"
+       font-size="11" fill="#8B909B">${v}</text>`).join('');
+
+  const ticks = [0, 90, 180, 270].map((b) =>
+    `<text x="${px(b)}" y="${H - B + 18}" text-anchor="middle" font-family="Inter,sans-serif"
+      font-size="11" fill="#8B909B">${b}°</text>`).join('');
+
+  const series = (store, colour, dash) => Object.keys(store)
+    .filter((k) => k === 'driveway' || k === 'back_yard')
+    .map((k) => `<polyline points="${store[k].map((v, i) => `${px(bearings[i])},${py(v)}`).join(' ')}"
+      fill="none" stroke="${colour}" stroke-width="2" stroke-dasharray="${dash}"/>`).join('');
+
+  const markerX = px(saved);
+  const inner = `${grid}
+    <line x1="${markerX}" y1="${T}" x2="${markerX}" y2="${H - B}" stroke="#17181B" stroke-width="1"/>
+    <text x="${markerX + 6}" y="${T + 12}" font-family="Inter,sans-serif" font-size="11"
+      fill="#17181B">this lot, ${saved.toFixed(2)}°</text>
+    ${series(dec, '#B45F1E', '')}
+    ${series(jun, '#35506B', '4 3')}
+    ${ticks}
+    <text x="${W - R + 10}" y="${py(dec.driveway[Math.round(saved / 10) % 36]) + 4}"
+      font-family="Inter,sans-serif" font-size="12" fill="#B45F1E">December</text>
+    <text x="${W - R + 10}" y="${py(jun.driveway[Math.round(saved / 10) % 36]) + 4}"
+      font-family="Inter,sans-serif" font-size="12" fill="#35506B">June</text>
+    <text x="${L - 10}" y="${T + 4}" text-anchor="end" font-family="Inter,sans-serif"
+      font-size="11" fill="#8B909B">hours</text>`;
+
+  $('compare').innerHTML = svgEl(`0 0 ${W} ${H}`, inner,
+    'role="img" aria-label="Sun hours against frontage bearing"');
+}
+
+/* ------------------------------------------------------------------- stats */
+
+function renderStats() {
+  const m = state.monthly;
+  const dec = m.zones.driveway[11];
+  const share = (100 * dec) / m.possible[11];
+  const backJun = m.zones.back_yard[5];
+  const backPct = (100 * backJun) / m.possible[5];
+  const summer = m.zones.back_yard.slice(4, 9);
+  const backAvg = summer.reduce((a, b) => a + b, 0) / summer.length;
+  $('stats').innerHTML = [
+    [dec.toFixed(1), 'h', 'Driveway in December, the shortest day of the year'],
+    [Math.round(share), '%', 'Of all the daylight there is on that day'],
+    [backJun.toFixed(1), 'h', 'Back yard in June, its best month'],
+    [Math.round(backPct), '%', 'Of June daylight reaching the back yard'],
+    [backAvg.toFixed(1), 'h', 'Back yard average across the growing season'],
+  ].map(([n, u, c]) =>
+    `<div class="stat"><span class="n">${n}<span class="u">${u}</span></span>
+      <div class="c">${c}</div></div>`).join('');
+
+  $('planProse').textContent =
+    `In December the driveway takes ${dec.toFixed(1)} of the ${m.possible[11].toFixed(1)} ` +
+    `hours of daylight there are - ${Math.round(share)} per cent. By June that falls to ` +
+    `${Math.round((100 * m.zones.driveway[5]) / m.possible[5])} per cent, because the summer sun ` +
+    `swings behind the house. The surface you have to clear gets the sun in the season you ` +
+    `need it, and gives it back in the season you do not.`;
+}
+
+/* ---------------------------------------------------------------- controls */
+
+function mountSceneControls() {
+  const total = state.season.days.length;
+  const firstNov = state.season.days.findIndex((d) => d.date.slice(5, 7) === '11');
+  $('sceneControls').innerHTML = `
+    <div class="ctl">
+      <label for="day">Date <output id="dayOut"></output></label>
+      <input type="range" id="day" min="0" max="${total - 1}" step="1" value="${state.day}">
+    </div>
+    <div class="ctl">
+      <label for="clock">Time of day <output id="clockOut"></output></label>
+      <input type="range" id="clock" min="0" max="1439" step="5" value="${state.minutes}">
+    </div>
+    <div class="ctl">
+      <label for="speed">Animation speed <output id="speedOut">1&times;</output></label>
+      <input type="range" id="speed" min="0" max="5" step="1" value="2">
+    </div>
+    <div class="ctl">
+      <label for="ground">Ground shows</label>
+      <select id="ground" style="font:400 14px/1 var(--font-ui);padding:8px 10px;
+        border:1px solid var(--rule-strong);background:var(--surface);border-radius:4px">
+        <option value="snow">Snow on the ground</option>
+        <option value="sun">Sun hours this month</option>
+      </select>
+    </div>
+    <button class="primary" id="play">Move the sun through the day</button>
+    <button class="text" id="melt">Move through the winter</button>`;
+
+  const SPEEDS = [0.25, 0.5, 1, 2, 4, 8];
+  let speed = 1;
+
+  const sync = () => {
+    const d = currentDay();
+    if (!d) return;
+    $('dayOut').textContent = d.date;
+    $('clockOut').textContent =
+      `${String(Math.floor(state.minutes / 60)).padStart(2, '0')}:${String(state.minutes % 60).padStart(2, '0')}`;
+  };
+
+  $('day').addEventListener('input', (e) => { state.day = +e.target.value; sync(); renderScene(); });
+  $('clock').addEventListener('input', (e) => { state.minutes = +e.target.value; sync(); renderScene(); });
+  $('ground').addEventListener('change', (e) => { state.ground = e.target.value; renderScene(); });
+  $('speed').addEventListener('input', (e) => {
+    speed = SPEEDS[+e.target.value];
+    $('speedOut').innerHTML = `${speed}&times;`;
+    if (timer) { const which = mode; stop(); start(which); }
+  });
+
+  let timer = null, mode = null;
+  function stop() {
+    clearInterval(timer); timer = null; mode = null;
+    $('play').textContent = 'Move the sun through the day';
+    $('melt').textContent = 'Move through the winter';
+  }
+  function start(which) {
+    mode = which;
+    if (which === 'day') {
+      $('play').textContent = 'Stop';
+      timer = setInterval(() => {
+        state.minutes = (state.minutes + 5) % 1440;
+        $('clock').value = state.minutes; sync(); renderScene();
+      }, Math.max(16, 120 / speed));
+    } else {
+      $('melt').textContent = 'Stop';
+      if (state.day < firstNov) state.day = firstNov;
+      timer = setInterval(() => {
+        state.day += 1;
+        if (state.day >= state.season.days.length - 1) return stop();
+        $('day').value = state.day; sync(); renderScene();
+      }, Math.max(16, 140 / speed));
+    }
+  }
+  $('play').addEventListener('click', () => (timer ? stop() : start('day')));
+  $('melt').addEventListener('click', () => (timer ? stop() : start('winter')));
+
+  sync();
+}
+
+function mountControls() {
+  $('planControls').innerHTML = `
+    <div class="ctl">
+      <label for="month">Month <output id="monthOut">December</output></label>
+      <input type="range" id="month" min="0" max="11" step="1" value="11">
+    </div>`;
+  $('month').addEventListener('input', (e) => {
+    state.month = +e.target.value;
+    $('monthOut').textContent = MONTHS[state.month];
+    renderPlan(state.month);
+  });
+
+  $('lotControls').innerHTML = `
+    <div class="ctl">
+      <label for="bearing">Frontage bearing <output id="bearingOut">114.42°</output></label>
+      <input type="range" id="bearing" min="0" max="359" step="1" value="114">
+    </div>
+    <div class="ctl check">
+      <input type="checkbox" id="fence" checked>
+      <label for="fence">Rear fence, 1.83 m</label>
+    </div>
+    <button class="text" id="reset">Reset to this lot</button>`;
+
+  $('bearing').addEventListener('input', (e) => {
+    setBearing(+e.target.value);
+    $('bearingOut').textContent = `${state.bearing.toFixed(0)}°`;
+    state.monthly = computeMonthly();
+    renderStats(); renderPlan(state.month); renderChart(); renderTimeline(); renderCompare();
+  });
+
+  $('fence').addEventListener('change', (e) => {
+    state.fence = e.target.checked;
+    $('plan').classList.add('busy');
+    $('plan').textContent = 'Recomputing shading model…';
+    setTimeout(() => {
+      rebuildGeometry();
+      state.season = computeSeason();
+      if (state.scene) { state.scene.rebuildFence(); renderScene(); }
+      renderAll();
+    }, 16);
+  });
+
+  $('reset').addEventListener('click', () => {
+    setBearing(state.site.orientation.front_azimuth_deg);
+    state.fence = true;
+    $('bearing').value = Math.round(state.bearing);
+    $('bearingOut').textContent = `${state.bearing.toFixed(2)}°`;
+    $('fence').checked = true;
+    rebuildGeometry(); renderAll();
+  });
+}
+
+function renderAll() {
+  state.monthly = computeMonthly();
+  renderStats();
+  renderPlan(state.month);
+  renderChart();
+  renderGarden();
+  renderTimeline();
+  renderCompare();
+}
+
+/* -------------------------------------------------------------------- boot */
+
+window.addEventListener('error', (e) => {
+  const host = $('sceneSrc');
+  if (!host) return;
+  host.innerHTML = `<span class="flag">Something failed while drawing: ` +
+    `${esc(e.message)} (${esc((e.filename || '').split('/').pop())}:${e.lineno}). ` +
+    `The rest of the page is unaffected.</span>`;
+});
+
+(async function init() {
+  // The standalone build embeds the data so the page works from file://,
+  // where fetch is blocked. Served from http, it loads the JSON normally.
+  const embedded = window.__FIRST_LIGHT_DATA__;
+  const [site, building] = embedded
+    ? [embedded.site, embedded.building]
+    : await Promise.all([
+        fetch('data/site.json').then((r) => r.json()),
+        fetch('data/building.json').then((r) => r.json()),
+      ]);
+  state.site = site;
+  state.building = building;
+  state.bearing = site.orientation.front_azimuth_deg;
+  rebuildGeometry();
+
+  state.season = computeSeason();
+  // Start on a late-winter morning, when the difference between surfaces is
+  // most visible: the driveway bare, the back yard still white.
+  state.day = state.season.days.findIndex((d) => d.date.endsWith('-03-15'));
+  if (state.day < 0) state.day = 200;
+  state.minutes = 10 * 60;
+
+  const host = $('scene');
+  host.classList.remove('busy');
+  host.textContent = '';
+  try {
+    state.scene = createScene(host, {
+      model: state.model, cells: state.cells, lat: LAT, lon: LON,
+    });
+    mountSceneControls();
+    renderScene();
+  } catch (err) {
+    host.textContent = `3D view unavailable: ${err.message}`;
+  }
+
+  $('sceneProse').textContent =
+    'The snow on the ground is not an illustration. Each half-metre patch carries ' +
+    'its own energy balance, driven by how much direct sun that patch actually ' +
+    'receives once the house, the fence and the roof have taken their share. ' +
+    'Run the melt season and watch the driveway and the front walk go bare while ' +
+    'the back yard, shaded by its own house all winter, holds its snow for weeks longer.';
+
+  mountControls();
+  renderAll();
+})().catch((err) => {
+  for (const id of ['plan', 'chart', 'timeline']) {
+    const el = $(id);
+    if (el) el.textContent = `Could not load the model: ${err.message}. ` +
+      `This page needs to be served over http - try npm run serve.`;
+  }
+});
+
+return {  };
+})();
+
+})();
+</script>
+</body>
+</html>

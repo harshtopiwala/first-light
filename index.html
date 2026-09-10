@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First Light - a sun study for one lot</title>
+<meta name="description" content="Working out which windows get the winter sun, whether the driveway clears itself, and when the back yard is usable - from the survey drawings and the historical weather record.">
+<!-- Link preview. LinkedIn, Slack and iMessage read these.
+     og:url and og:image MUST be absolute URLs. A relative path renders no card. -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="First Light - a sun study for one lot">
+<meta property="og:description" content="The driveway takes 96 per cent of December's daylight. Computed from the survey drawings, with every assumption and its sensitivity stated.">
+<meta property="og:url" content="https://REPLACE-WITH-YOUR-PAGES-URL/">
+<meta property="og:image" content="https://REPLACE-WITH-YOUR-PAGES-URL/og_preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FCFBF8; --paper-sunk:#F5F2EC; --surface:#fff;
+  --rule:#E3DFD6; --rule-strong:#C9C3B6;
+  --ink:#17181B; --ink-2:#575C66; --ink-3:#8B909B;
+  --sun:#B45F1E; --sun-tint:#F3E5D4; --shade:#35506B; --shade-tint:#DFE5EB;
+  --snow:#6E93B8; --warn:#8A5A1B;
+  --font-display:"Source Serif 4",Georgia,serif;
+  --font-body:"Source Serif 4",Georgia,serif;
+  --font-ui:Inter,system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 18px/1.62 var(--font-body);
+  font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.measure{max-width:680px}
+h1,h2,h3{font-family:var(--font-display);margin:0}
+h1{font-size:44px;line-height:1.12;letter-spacing:-.02em;font-weight:400;max-width:17ch}
+h2{font-size:28px;line-height:1.2;letter-spacing:-.01em;font-weight:600;margin:96px 0 24px}
+h3{font-size:20px;line-height:1.3;font-weight:600;margin:0 0 12px}
+p{margin:0 0 24px}
+a{color:var(--sun);text-decoration:none;border-bottom:1px solid transparent}
+a:hover{border-bottom-color:var(--sun)}
+:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+
+.masthead{padding:64px 0 0}
+.label{font:400 13px/1.5 var(--font-ui);color:var(--ink-2);margin:0 0 16px}
+.lead{font-size:21px;line-height:1.55}
+
+/* dimension-tick divider, borrowed from the survey drawings */
+.dim{display:flex;align-items:center;gap:12px;margin:64px 0 32px;
+  font:400 13px/1 var(--font-ui);color:var(--ink-2)}
+.dim::before{content:"";flex:0 0 24px;height:1px;background:var(--rule-strong)}
+.dim::after{content:"";flex:1;height:1px;background:var(--rule-strong)}
+
+.stats{display:flex;gap:64px;flex-wrap:wrap;margin:48px 0 0}
+.stat{border-left:1px solid var(--rule-strong);padding-left:16px}
+.stat .n{display:block;font:400 40px/1 var(--font-mono);letter-spacing:-.01em}
+.stat .u{font-size:.55em;color:var(--ink-3);margin-left:2px}
+.stat .c{font:400 15px/1.45 var(--font-body);color:var(--ink-2);margin-top:8px;max-width:26ch}
+
+.plate{background:var(--surface);border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);padding:32px;margin:48px 0}
+figure{margin:0}
+figcaption{font:400 13px/1.5 var(--font-ui);color:var(--ink-2);margin-top:16px;max-width:78ch}
+figcaption b{color:var(--ink);font-weight:600}
+.src{font:400 12px/1.5 var(--font-ui);color:var(--ink-3);margin:12px 0 0}
+
+.controls{display:flex;gap:32px;flex-wrap:wrap;align-items:flex-end;
+  border-top:1px solid var(--rule);padding-top:20px;margin-top:24px}
+.ctl{display:flex;flex-direction:column;gap:8px;min-width:180px}
+.ctl label{font:500 13px/1 var(--font-ui);color:var(--ink-2)}
+.ctl output{font:400 13px/1 var(--font-mono);color:var(--ink)}
+input[type=range]{appearance:none;width:100%;height:14px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule-strong)}
+input[type=range]::-moz-range-track{height:2px;background:var(--rule-strong)}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--rule-strong);margin-top:-6px}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--rule-strong)}
+.check{flex-direction:row;align-items:center;gap:10px;min-width:0}
+.check input{accent-color:var(--sun);width:16px;height:16px}
+button.primary{font:500 14px/1 var(--font-ui);letter-spacing:.01em;background:var(--ink);
+  color:var(--paper);border:0;border-radius:4px;padding:10px 18px;cursor:pointer}
+button.text{font:500 14px/1 var(--font-ui);background:none;border:0;color:var(--sun);
+  cursor:pointer;padding:10px 0;border-bottom:1px solid transparent}
+button.text:hover{border-bottom-color:var(--sun)}
+
+table{border-collapse:collapse;width:100%;font:400 13px/1.45 var(--font-mono)}
+th,td{padding:8px 10px;text-align:right}
+thead th{background:var(--paper-sunk);font-weight:400;color:var(--ink-2)}
+tbody tr{border-top:1px solid var(--rule)}
+tbody tr:hover{background:var(--sun-tint)}
+th:first-child,td:first-child{text-align:left;font:400 14px/1.4 var(--font-ui)}
+tr.aux td{color:var(--ink-3)}
+
+.flag{font:400 11px/1.4 var(--font-ui);color:var(--warn)}
+.flag::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--warn);margin-right:6px;vertical-align:2px}
+.assump th:first-child{width:26%}
+.assump td,.assump th{text-align:left}
+.assump td:last-child{color:var(--ink-2)}
+
+.busy{font:400 13px/1 var(--font-ui);color:var(--ink-3);padding:80px 0;text-align:center}
+.scroller{overflow-x:auto}
+footer{margin:96px 0 64px;border-top:1px solid var(--rule);padding-top:24px;
+  font:400 13px/1.6 var(--font-ui);color:var(--ink-3)}
+
+@media(max-width:900px){
+  .plate{margin-left:-24px;margin-right:-24px;border-left:0;border-right:0;padding:24px 16px}
+}
+@media(max-width:640px){
+  body{font-size:17px}
+  h1{font-size:34px}
+  h2{font-size:24px;margin-top:64px}
+  .stats{gap:32px}
+  .ctl{min-width:100%}
+  input[type=range]{height:44px}
+  input[type=range]::-webkit-slider-thumb{margin-top:-21px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header class="masthead measure">
+    <p class="label">A zero-lot-line lot in southwest Edmonton</p>
+    <h1>The driveway faces the winter sunrise</h1>
+    <p class="lead">Buying a house from a plan means committing to an orientation
+    before anything is built. Which rooms get morning light, whether the driveway
+    clears itself, when the back yard becomes usable again - all of it is fixed the
+    moment you choose a lot, and none of it appears on a feature sheet. This is what
+    the survey drawings and the weather record say about one of them.</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <p class="dim">The lot, through the year</p>
+
+  <figure class="plate">
+    <div id="scene" class="busy" style="min-height:320px">Building the model…</div>
+    <div class="controls" id="sceneControls"></div>
+    <figcaption><b>Figure 1.</b> The surveyed massing under real solar geometry.
+    Shadows are cast by the renderer from the sun's true position for the date and
+    time shown. The ground carries the output of the melt model: where the snow is
+    thin, it is thin because that patch received more energy. Drag to orbit, scroll
+    to zoom.</figcaption>
+    <p class="src" id="sceneSrc"></p>
+  </figure>
+
+  <div class="measure"><p id="sceneProse"></p></div>
+
+  <p class="dim">Where the sun lands</p>
+
+  <figure class="plate">
+    <div id="plan" class="busy">Computing shading model…</div>
+    <div class="controls" id="planControls"></div>
+    <figcaption><b>Figure 1.</b> Direct sun hours on open ground, by half-metre cell,
+    on a clear day. Rear of the lot at the top, frontage at the bottom. The needle
+    shows true north at its surveyed bearing. Drag the month to step through the year.</figcaption>
+    <p class="src">Geometry from the preliminary plot plan and the
+    Cantiro elevation set. Solar position by the NOAA/Meeus algorithm.</p>
+  </figure>
+
+  <div class="measure">
+    <p id="planProse"></p>
+  </div>
+
+  <h2>Every window faces front or back</h2>
+  <div class="measure">
+    <p>This is a zero-lot-line skinny home, and both long elevations are blank -
+    soffit vents only, no windows at all. That single fact is why orientation
+    matters more here than it would on a wide lot. There is no side glazing to
+    compensate with. The frontage bearing is not one input among many; it is the
+    only thing that determines interior daylight.</p>
+    <p>The floor plans then decide who gets which half. Kitchen, dining, living
+    room, primary bedroom and ensuite all face the rear, so they take the long
+    summer evening. Garage, den, foyer and all three children's bedrooms face the
+    front, so they take the winter morning.</p>
+  </div>
+
+  <figure class="plate">
+    <div id="chart" class="busy">Computing…</div>
+    <figcaption><b>Figure 2.</b> Direct sun hours per clear day through the year,
+    by zone, against the daylight available that day.</figcaption>
+  </figure>
+
+  <h2>The back yard: planting, and evenings</h2>
+  <div class="measure">
+    <p id="gardenProse"></p>
+  </div>
+
+  <figure class="plate scroller">
+    <table id="garden"></table>
+    <figcaption><b>Figure 3.</b> Growing-season sun by zone. Categories follow the
+    usual horticultural bands: full sun is six hours a day or more, part sun four
+    to six, part shade two to four, full shade below two. Evening hours are direct
+    sun after 5pm on the longest day, which is when a back yard actually gets used.</figcaption>
+    <p class="src">Clear-day hours. Cloud cover will reduce all of these
+    proportionally; the ranking between zones does not change.</p>
+  </figure>
+
+  <h2>The one day that matters</h2>
+  <div class="measure">
+    <p id="winterProse"></p>
+  </div>
+
+  <figure class="plate">
+    <div id="timeline" class="busy">Computing…</div>
+    <figcaption><b>Figure 4.</b> When each zone is more than half lit on 21 December,
+    in local time.</figcaption>
+  </figure>
+
+  <h2>Try it on your own lot</h2>
+  <div class="measure">
+    <p>The engine takes a frontage bearing and a latitude and works everything out
+    from there. Turn the lot and watch which surfaces gain and lose. The bearing
+    slider is instant because rotating the lot does not change what the house blocks
+    - only where the sun is relative to it.</p>
+  </div>
+
+  <figure class="plate">
+    <div class="controls" id="lotControls"></div>
+    <div id="compare" style="margin-top:24px"></div>
+    <figcaption><b>Figure 5.</b> December and June sun hours by zone as the frontage
+    bearing turns. The vertical rule marks this lot at 114.42°.</figcaption>
+  </figure>
+
+  <h2>What the model assumes</h2>
+  <div class="measure">
+    <p>The preliminary plot plan is treated as final. Where it defers a value, a
+    standard assumption is taken. Each one below carries what it costs if it is
+    wrong, measured by rerunning the model rather than estimated.</p>
+  </div>
+  <div class="plate scroller">
+    <table class="assump">
+      <thead><tr><th>Assumption</th><th>Value</th><th>Basis</th><th>Cost if wrong</th></tr></thead>
+      <tbody>
+        <tr><td>Finished floor above grade</td><td>0.65 m</td>
+            <td>Entry step stack and foundation stack agree independently</td>
+            <td>Negligible. Moving it 50 mm changed no zone by more than 0.1 h</td></tr>
+        <tr><td>Rear fence</td><td>1.83 m, three sides</td>
+            <td>Standard built height; plot plan shows a proposed fence line</td>
+            <td>Large. Removing it returns 5.5 h of December sun to the back lawn</td></tr>
+        <tr><td>Deck</td><td>3.96 × 4.0 m</td>
+            <td>Width is the 13 ft deck nailer on the rear elevation</td>
+            <td>Small, and confined to the deck</td></tr>
+        <tr><td>Neighbouring houses</td><td>omitted</td>
+            <td>Measured by running the model both ways, not assumed</td>
+            <td>0.7 h in June and 0.1 h in December on the driveway</td></tr>
+        <tr><td>Trees</td><td>omitted</td>
+            <td>Two required by the City landscaping condition</td>
+            <td>Negligible at planting size; deciduous stock is bare in melt season</td></tr>
+      </tbody>
+    </table>
+    <p class="src flag">Every figure on this page carries the assumptions above.
+    The fence is the only one that changes a conclusion.</p>
+  </div>
+
+  <footer>
+    First Light · computed in this browser from the survey drawings.
+    Solar engine validated against Edmonton's published solstice day lengths to
+    within ten seconds. Source and method at the project repository.
+  </footer>
+
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>

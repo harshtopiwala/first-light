@@ -1,0 +1,99 @@
+{
+  "model": "Cantiro Family Spaces 24 Craftsman",
+  "architectural_set": "Builder architectural set, 17 sheets",
+  "floor_area_sq_ft": 2489,
+  "units": "metres",
+  "_note": "Every height below is traced to a printed dimension on a specific sheet. Values marked derived are arithmetic on those dimensions. The one assumption is main_floor_above_grade - the plot plan is preliminary and says finished-floor elevation is set at final plot.",
+  "storeys": {
+    "basement": {
+      "foundation_wall_height_m": 2.819,
+      "source": "Sheet 7 Foundation Plan: FOUNDATION HT 8'-3\", upgraded to 9'-3\" by change order 6",
+      "ceiling_height_m": 2.743,
+      "finished_area_sq_ft": 731,
+      "slab_area_sq_ft": 902
+    },
+    "main": {
+      "ceiling_height_m": 2.769,
+      "source": "Sheet 3 Main Floor Plan: MAIN FLOOR AREA H: 9'-1\"",
+      "area_sq_ft": 1070
+    },
+    "second": {
+      "ceiling_height_m": 2.464,
+      "source": "Sheet 6 Second Floor Plan: SECOND FLOOR AREA H: 8'-1\"",
+      "area_sq_ft": 1494
+    }
+  },
+  "heights_above_main_floor": {
+    "midpoint_of_peak_m": 6.858,
+    "midpoint_source": "Sheet 1 Front Elevation, dimension 22'-6\" labelled 0.99/6.86",
+    "top_of_peak_m": 7.849,
+    "top_source": "Sheet 1 Front Elevation, dimension 25'-9\" labelled 7.85",
+    "eave_m": 5.867,
+    "eave_derivation": "2 x midpoint - ridge. Edmonton measures building height to the midpoint between eave and ridge, so the eave follows from the two printed dimensions.",
+    "eave_cross_check": "Storey stack gives 2.769 main + 0.406 floor system (16\" eng. joists, sheet 7) + 2.464 second = 5.639 m to the top of the second-floor ceiling. The 0.228 m remainder is top plate and truss heel, which is the expected order. The two routes agree.",
+    "roof_rise_m": 1.982,
+    "roof_pitch_cross_check": "6:12 over a 3.66 m half-width gives 1.83 m of rise; the extra 0.15 m is fascia and heel. Consistent with the 12/6 pitch marker on sheets 1 and 4."
+  },
+  "main_floor_above_grade_m": 0.65,
+  "main_floor_above_grade_status": "RESOLVED as a standard assumption. The plot plan defers finished floor to final plot, so it is derived two ways and the two agree. (1) Entry stack: sheet 2 shows a 3-rise step with a 4-rise side onto a precast concrete veranda; three exterior risers at the usual 185 mm is 0.555 m, plus the veranda-to-threshold sill of roughly 0.09 m gives 0.65 m. (2) Foundation stack: top of concrete sits 0.24 m above finished grade, which is standard practice and above the 0.15 m code minimum, plus the 16 inch engineered floor system (0.406 m) from sheet 7, giving 0.65 m. Plausible range 0.55-0.80 m; sensitivity is 0.65 m of midwinter shadow per 0.15 m of height.",
+  "derived_above_grade": {
+    "eave_m": 6.517,
+    "ridge_m": 8.499
+  },
+  "roof": {
+    "form": "gable to the street, hip to the rear",
+    "ridge_runs": "along the long axis of the house, front to rear",
+    "main_pitch": "6:12",
+    "secondary_pitches": [
+      "5:12"
+    ],
+    "source": "Sheets 1-4 elevations"
+  },
+  "glazing": {
+    "front_facade": "upper floor 2 windows; main floor window, top-lite front door with transom, garage door",
+    "rear_facade": "upper floor 2 windows; main floor patio door plus two large window assemblies",
+    "left_facade": "NO WINDOWS - blank wall, soffit vents only (sheet 2)",
+    "right_facade": "NO WINDOWS - blank wall, soffit vents only (sheet 3)",
+    "significance": "This is a zero-lot-line skinny home: both long walls are windowless. Every window in the house faces either the front or the rear, so the frontage bearing alone determines interior daylight.",
+    "spec": "All windows triple pane, low-E coating, argon filled, U-value <= 1.6, ER rating >= 25, Zone 7A (sheet 1)"
+  },
+  "deck": {
+    "width_m": 3.962,
+    "depth_m": 4.0,
+    "width_source": "Sheet 4 Rear Elevation: DECK NAILER 13'-0\"",
+    "depth_status": "RESOLVED as a standard assumption. Width is the 13 ft deck nailer on sheet 4; depth taken as 4.0 m, matching the owner's square-deck intent and leaving 4.38 m of open lawn behind it within the 8.38 m rear yard.",
+    "surface_below_main_floor_m": 0.2,
+    "position": "centred on the rear wall at the patio door"
+  },
+  "room_orientation": {
+    "_note": "Builder left/right are as seen facing the front of the house.",
+    "rear_facing": [
+      "kitchen",
+      "dining",
+      "living room",
+      "primary bedroom",
+      "ensuite"
+    ],
+    "front_facing": [
+      "garage",
+      "den",
+      "foyer",
+      "family entrance",
+      "bedroom 2",
+      "bedroom 3",
+      "kids room",
+      "main bath"
+    ],
+    "source": "Sheets 3 and 6 floor plans, garage at the street end"
+  },
+  "fence": {
+    "height_m": 1.83,
+    "extent": "rear yard, three sides, returning to the house at the rear corners",
+    "status": "RESOLVED as a standard assumption. 6 ft is the standard built height for an Edmonton rear-yard fence and the plot plan carries a proposed fence line. This is the single largest lever on the rear yard: removing it returns 5.5 h of December sun to the back lawn."
+  },
+  "trees": {
+    "count": 2,
+    "shrubs": 6,
+    "status": "Omitted from the model. Required by the City landscaping condition on the plot plan. At planting size their shading is negligible, and deciduous stock is bare through the entire melt season."
+  }
+}

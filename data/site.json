@@ -1,0 +1,82 @@
+{
+  "id": "sw-edmonton-zll-lot",
+  "label": "A zero-lot-line lot in southwest Edmonton",
+  "source": {
+    "document": "Preliminary plot plan prepared by an Alberta land surveyor",
+    "scale": "1:300",
+    "note": "Preliminary, for siting purposes only. Parcel identifiers and civic address removed for publication."
+  },
+  "builder": "Cantiro Homes",
+  "model": "Family Spaces 24 Prairie (Standard)",
+  "geometry_units": "metres",
+  "lot": {
+    "width_m": 8.922,
+    "depth_m": 35.001,
+    "area_m2": 312.27,
+    "corners": [
+      [
+        0,
+        0
+      ],
+      [
+        8.922,
+        0
+      ],
+      [
+        8.922,
+        35.001
+      ],
+      [
+        0,
+        35.001
+      ]
+    ]
+  },
+  "house": {
+    "footprint": [
+      [
+        0.06,
+        26.617
+      ],
+      [
+        7.384,
+        26.617
+      ],
+      [
+        7.384,
+        5.62
+      ],
+      [
+        1.288,
+        5.62
+      ],
+      [
+        1.288,
+        13.663
+      ],
+      [
+        0.06,
+        13.663
+      ]
+    ],
+    "foundation_area_m2": 143.9,
+    "sheet_house_area_m2": 151.62,
+    "cantilever": {
+      "width_m": 6.25,
+      "projection_m": 1.22,
+      "note": "Second floor projects over the inset garage wall on the zero-lot-line side. Above roughly 3 m the massing is the full lot-width rectangle."
+    },
+    "coverage_pct": 46.08,
+    "setbacks_m": {
+      "front": 5.62,
+      "rear": 8.384,
+      "west": 0.06,
+      "east": 1.538
+    }
+  },
+  "orientation": {
+    "front_azimuth_deg": 114.42,
+    "north_arrow_cw_from_page_up_deg": 65.58,
+    "datum_note": "Bearing read from the plan's north symbol. Alberta subdivision plans are referenced to 3TM grid north; grid convergence at this longitude is about 0.3°, which is below the resolution of the drawing."
+  }
+}

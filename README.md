@@ -90,13 +90,6 @@ and every figure is computed in the browser when the page loads.
 what GitHub Pages serves, and it needs a web server - browsers block modules and fetch
 on `file://`. Locally, `npm run serve` and open `localhost:8000`.
 
-### Publishing to GitHub Pages
-
-Settings, Pages, deploy from branch `main`, folder `/ (root)`. Two things to do first:
-
-1. Replace `REPLACE-WITH-YOUR-PAGES-URL` in the `og:url` and `og:image` tags in
-   `index.html`. They must be absolute URLs or no link preview renders.
-2. Rebuild the standalone afterwards so it carries the same tags: `npm run build`.
 
 ## A note on privacy
 
